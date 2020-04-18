@@ -21,7 +21,6 @@ public class EnderecoDAO {
 		String comandoSQL = "";
 		try {
 			PreparedStatement prst = this.con.prepareStatement(comandoSQL);
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -49,9 +48,7 @@ public class EnderecoDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return null;
-
 	}
 
 	public void inserirNovoEndereco(EnderecoModel endereco){
@@ -60,7 +57,6 @@ public class EnderecoDAO {
 
 		try {
 			PreparedStatement ppStm = this.con.prepareStatement(comandoSQL);
-
 			ppStm.setString(1, endereco.getCEP());
 			ppStm.setString(2, endereco.getLogradouro());
 			ppStm.setString(3, endereco.getBairro());
