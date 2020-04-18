@@ -12,12 +12,12 @@
          <children>
             <Label layoutX="-15.0" layoutY="162.0" rotate="-90.0" text="Maracujá" textAlignment="CENTER" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="18.0"/>
                </font>
             </Label>
             <MaskField fx:id="txtCEP" layoutX="347.0" layoutY="71.0" mask="DDDDDDDD" onKeyReleased="#searchCEP" prefHeight="45.0" prefWidth="350.0" text="_____-___">
                <font>
-                  <Font size="14.0" />
+                  <Font size="14.0"/>
                </font>
             </MaskField>
             <Label layoutX="347.0" layoutY="51.0" text="CEP" textFill="WHITE">
@@ -27,36 +27,36 @@
             </Label>
             <TextField fx:id="txtBairro" disable="true" editable="false" layoutX="347.0" layoutY="146.0" prefHeight="45.0" prefWidth="350.0" promptText="Bairro">
                <font>
-                  <Font size="14.0" />
+                  <Font size="14.0"/>
                </font>
             </TextField>
             <TextField fx:id="txtLougradouro" disable="true" editable="false" layoutX="347.0" layoutY="226.0" prefHeight="45.0" prefWidth="350.0" promptText="Logradouro">
                <font>
-                  <Font size="14.0" />
+                  <Font size="14.0"/>
                </font>
             </TextField>
             <Pane fx:id="paneResposta" layoutX="311.0" prefHeight="35.0" prefWidth="260.0" style="-fx-background-color: #86C60F; -fx-background-radius: 0 0 18 0;" visible="false">
                <children>
                   <Label fx:id="txtResultado" alignment="CENTER" layoutX="66.0" layoutY="9.0" nodeOrientation="LEFT_TO_RIGHT" text="TEMOS ESTRUTURA" textAlignment="CENTER" textFill="WHITE">
                      <font>
-                        <Font name="Maiandra GD" size="14.0" />
+                        <Font name="Maiandra GD" size="14.0"/>
                      </font>
                   </Label>
                </children>
             </Pane>
             <Label layoutX="347.0" layoutY="126.0" text="Bairro" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="System Bold" size="14.0"/>
                </font>
             </Label>
             <Label layoutX="347.0" layoutY="205.0" text="Logradouro" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="System Bold" size="14.0"/>
                </font>
             </Label>
             <Button fx:id="btnSair" layoutX="746.0" layoutY="14.0" mnemonicParsing="false" onAction="#encerrarAplicacao" prefHeight="35.0" prefWidth="35.0" style="-fx-background-radius: 18 18 18 18; -fx-border-radius: 18 18 18 18;" text="x" textAlignment="CENTER">
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="System Bold" size="12.0"/>
                </font></Button>
          </children></Pane>
       <Pane fx:id="paneColor" layoutX="125.0" layoutY="143.0" prefHeight="450.0" prefWidth="265.0" style="-fx-background-color: #FFFD38; -fx-border-color: black; -fx-background-radius: 18 18 18 18; -fx-border-radius: 18 18 18 18;">
@@ -65,7 +65,7 @@
                <children>
                   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="25.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../icons/maracuja.png" />
+                        <Image url="@../icons/maracuja.png"/>
                      </image>
                   </ImageView>
                </children>
