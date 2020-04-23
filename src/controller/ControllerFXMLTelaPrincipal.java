@@ -1,24 +1,25 @@
 package controller;
 
-import animatefx.animation.FadeIn;
-import animatefx.animation.Pulse;
-import animatefx.animation.SlideInLeft;
+import animatefx.animation.*;
 import dao.EnderecoDAO;
 import helper.ViaCEPException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import model.EnderecoModel;
 import service.ViaCEP;
 import util.MaskField;
-import validator.Validation;
-
 
 public class ControllerFXMLTelaPrincipal {
+
+    @FXML
+    Hyperlink addCEP = new Hyperlink();
 
     @FXML
     MaskField txtCEP = new MaskField();
@@ -27,20 +28,14 @@ public class ControllerFXMLTelaPrincipal {
     TextField txtLougradouro, txtBairro;
 
     @FXML
-    Pane paneColor, paneIcon, paneResposta;
+    Pane paneColor, paneIcon, paneResposta, paneAddNewCep;
 
     @FXML
-    Button btnSair, btnNovoCEP;
+    Button btnSair;
 
     @FXML
     Label txtResultado;
 
-    TextField alertLogradouro, alertBairro;
-
-    MaskField alertCEP;
-
-    Validation val = new Validation();
-    ViaCEP viaCEP = new ViaCEP();
     EnderecoModel end = new EnderecoModel();
     EnderecoDAO dao = new EnderecoDAO();
 
@@ -57,21 +52,23 @@ public class ControllerFXMLTelaPrincipal {
 
                 new Pulse(paneIcon).setSpeed(0.6).play();
                 end = dao.consultarCEP(txtCEP.getText());
-
                 if (end == null){
                     ViaCEP viaCEP = new ViaCEP();
                     try {
                         viaCEP.buscar(txtCEP.getText());
                         paneResposta.setVisible(true);
                         paneResposta.setStyle("-fx-background-color: #FD1810; -fx-background-radius: 0 0 18 0;");
+                        paneAddNewCep.setVisible(true);
+                        new SlideOutUp(paneAddNewCep).play();
                         new FadeIn(paneResposta).play();
                         new SlideInLeft(paneResposta).play();
                         txtResultado.setText("SEM ESTRUTURA");
-
                         txtLougradouro.setText(viaCEP.getLogradouro());
                         txtBairro.setText(viaCEP.getBairro());
-
                     } catch (ViaCEPException e) {
+                        if (paneAddNewCep.isVisible()){
+                            paneAddNewCep.setVisible(false);
+                        }
                         paneResposta.setStyle("-fx-background-color: #FD1810; -fx-background-radius: 0 0 18 0;");
                         new FadeIn(paneResposta).play();
                         new SlideInLeft(paneResposta).play();
@@ -83,6 +80,9 @@ public class ControllerFXMLTelaPrincipal {
                     }
 
                 } else {
+                    if (paneAddNewCep.isVisible()){
+                        paneAddNewCep.setVisible(false);
+                    }
                     paneResposta.setVisible(true);
                     paneResposta.setStyle("-fx-background-color: #86C60F; -fx-background-radius: 0 0 18 0;");
                     new FadeIn(paneResposta).play();
@@ -95,19 +95,12 @@ public class ControllerFXMLTelaPrincipal {
         }
     }
 
-    private void popularCampos(){
-        if(val.verificarCEP(txtCEP.getText())){
-            try {
-                viaCEP.buscar(txtCEP.getText());
-                alertCEP.setText(txtCEP.getText());
-                alertBairro.setText(viaCEP.getBairro());
-                alertLogradouro.setText(viaCEP.getLogradouro());
-            } catch (ViaCEPException e) {
-                e.printStackTrace();
-            }
-        } else {
-            alertBairro.setText("Bairro");
-            alertLogradouro.setText("Logradouro");
-        }
+    public void addNewCep(){
+        paneAddNewCep.setVisible(false);
+        EnderecoModel end = new EnderecoModel();
+        end.setCEP(txtCEP.getText());
+        end.setLogradouro(txtLougradouro.getText());
+        end.setBairro(txtBairro.getText());
+        dao.addNewEndereco(end);
     }
 }

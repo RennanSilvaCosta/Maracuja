@@ -1,7 +1,6 @@
 package main;
 
 import animatefx.animation.FadeIn;
-import animatefx.animation.SlideInDown;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
