@@ -36,15 +36,13 @@ public class ViaCEP extends ViaCEPBase {
 		String currentCEP = cep;
 
 		// define a url
-		String url = "http://viacep.com.br/ws/" + cep + "/json/";
+		String url = "https://maracuja-api.herokuapp.com/enderecos/1";
 
 		// define os dados
 		JSONObject obj = new JSONObject(getHttpGET(url));
 
 		if (!obj.has("erro")) {
-			CepModel novoCEP = new CepModel(obj.getString("cep"), obj.getString("logradouro"),
-					obj.getString("complemento"), obj.getString("bairro"), obj.getString("localidade"),
-					obj.getString("uf"), obj.getString("ibge"), obj.getString("gia"));
+			CepModel novoCEP = new CepModel(obj.getString("cep"), obj.getString("logradouro"), obj.getString("bairro"));
 
 			// insere o novo CEP
 			CEPs.add(novoCEP);

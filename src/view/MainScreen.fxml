@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import util.*?>
+
+<Pane depthTest="ENABLE" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="750.0" prefWidth="970.0" style="-fx-background-color: transparent;" stylesheets="/stylesheets/styleMainScreen.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerFXMLTelaPrincipal">
+   <children>
+      <Pane fx:id="paneMain" layoutX="47.0" layoutY="200.0" prefHeight="350.0" prefWidth="870.0" style="-fx-background-radius: 18 18 18 18;" stylesheets="@../stylesheets/styleMainScreen.css">
+         <children>
+            <Label layoutX="-2.0" layoutY="162.0" rotate="-90.0" text="Maracujá" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Pane fx:id="paneAddNewCep" layoutX="475.0" layoutY="71.0" prefHeight="29.0" prefWidth="300.0" style="-fx-background-color: #FFFD38; -fx-background-radius: 18 18 0 0;" visible="false">
+               <children>
+                  <Label layoutX="27.0" layoutY="6.0" prefHeight="17.0" prefWidth="215.0" text="Você pode adicionar este CEP, clicando" />
+                  <Hyperlink fx:id="addCEP" layoutX="234.0" layoutY="3.0" text="aqui" />
+               </children>
+            </Pane>
+            <MaskField fx:id="txtCEP" layoutX="441.0" layoutY="71.0" mask="DDDDDDDD" onKeyReleased="#searchCEP" prefHeight="45.0" prefWidth="350.0" text="_____-___">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </MaskField>
+            <Label layoutX="441.0" layoutY="51.0" text="CEP" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtBairro" editable="false" layoutX="441.0" layoutY="146.0" prefHeight="45.0" prefWidth="350.0" promptText="Bairro">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtLougradouro" editable="false" layoutX="441.0" layoutY="226.0" prefHeight="45.0" prefWidth="350.0" promptText="Logradouro">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Pane layoutX="330.0" layoutY="51.0" prefHeight="240.0" prefWidth="95.0" style="-fx-background-color: #777777; -fx-background-radius: 18 18 18 18">
+               <children>
+                  <ImageView fx:id="btnimportcsv" fitHeight="48.0" fitWidth="48.0" layoutX="26.0" layoutY="42.0" onMouseClicked="#importarCSB" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/icon-importar-csv.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="btnbuscar" fitHeight="48.0" fitWidth="48.0" layoutX="26.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/icon-pesquisar.png" />
+                     </image>
+                  </ImageView>
+               </children></Pane>
+            <Pane fx:id="paneResposta" layoutX="311.0" prefHeight="35.0" prefWidth="260.0" style="-fx-background-color: #86C60F; -fx-background-radius: 0 0 18 0;" visible="false">
+               <children>
+                  <Label fx:id="txtResultado" alignment="CENTER" layoutX="66.0" layoutY="9.0" nodeOrientation="LEFT_TO_RIGHT" text="TEMOS ESTRUTURA" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Maiandra GD" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Label layoutX="441.0" layoutY="126.0" text="Bairro" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="441.0" layoutY="205.0" text="Logradouro" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btnSair" layoutX="835.0" mnemonicParsing="false" onAction="#encerrarAplicacao" prefHeight="35.0" prefWidth="35.0" stylesheets="@../stylesheets/styleButton.css" text="x" textAlignment="CENTER">
+               <font>
+                  <Font name="Ebrima Bold" size="12.0" />
+               </font></JFXButton>
+         </children></Pane>
+      <Pane fx:id="paneColor" layoutX="125.0" layoutY="143.0" prefHeight="450.0" prefWidth="265.0" style="-fx-border-color: black; -fx-background-radius: 18 18 18 18; -fx-border-radius: 18 18 18 18;" stylesheets="@../stylesheets/styleMainScreen.css">
+         <children>
+            <ImageView fx:id="imgPhotoUser" fitHeight="180.0" fitWidth="180.0" layoutX="43.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/maracuja.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</Pane>

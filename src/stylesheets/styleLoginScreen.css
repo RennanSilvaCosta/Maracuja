@@ -1,0 +1,13 @@
+#paneMain {
+    -fx-background-color: linear-gradient(to bottom right, #FFB300, #FFCA28);
+}
+
+#btnEsqueceu:hover {
+    -fx-text-fill: #6747CD;
+    -fx-underline: true;
+}
+
+#btnCadastrar:hover {
+    -fx-text-fill: #6747CD;
+    -fx-underline: true;
+}

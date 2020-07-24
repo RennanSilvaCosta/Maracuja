@@ -10,5 +10,6 @@
     <orderEntry type="library" name="io.github.typhon0:AnimateFX:1.2.1" level="project" />
     <orderEntry type="library" name="mysql-connector-java-5.1.25-bin" level="project" />
     <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="jfoenix-9.0.10" level="project" />
   </component>
 </module>

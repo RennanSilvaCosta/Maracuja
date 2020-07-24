@@ -1,0 +1,35 @@
+#paneColor {
+    -fx-background-color: radial-gradient(center 50% 50%, radius 200px, #FFB300, #FEE140);
+}
+
+#paneMain {
+   -fx-background-color: linear-gradient(to right, #434343, #596164);
+}
+
+#btnimportcsv {
+    transition-duration: 5s;
+    transition-property: transform;
+}
+
+#btnbuscar {
+    transition-duration: 5s;
+    transition-property: transform;
+}
+
+#btnbuscar:hover {
+    -fx-effect: dropshadow(three-pass-box, black, 20, 0, 0, 0);
+    -fx-scale-x: 1.3;
+    -fx-scale-y: 1.3;
+    -fx-scale-z: 1.3;
+    transition-duration: 0.3s;
+    transition-property: transform;
+}
+
+#btnimportcsv:hover {
+    -fx-effect: dropshadow(three-pass-box, black, 20, 0, 0, 0);
+    -fx-scale-x: 1.3;
+    -fx-scale-y: 1.3;
+    -fx-scale-z: 1.3;
+    transition-duration: 0.3s;
+    transition-property: transform;
+}
