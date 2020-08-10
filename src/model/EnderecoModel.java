@@ -1,17 +1,38 @@
 package model;
 
-public class EnderecoModel {
+import java.io.Serializable;
 
-	private String CEP;
-	private String bairro;
+public class EnderecoModel implements Serializable {
+
+	private Integer id;
+	private String cep;
 	private String logradouro;
+	private String bairro;
 
-	public String getCEP() {
-		return CEP;
+	public EnderecoModel() {
 	}
 
-	public void setCEP(String cEP) {
-		CEP = cEP;
+	public EnderecoModel(Integer id, String cep, String logradouro, String bairro) {
+		this.id = id;
+		this.cep = cep;
+		this.bairro = bairro;
+		this.logradouro = logradouro;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cEP) {
+		cep = cEP;
 	}
 
 	public String getBairro() {
@@ -28,6 +49,11 @@ public class EnderecoModel {
 
 	public void setLogradouro(String endereco) {
 		logradouro = endereco;
+	}
+
+	@Override
+	public String toString() {
+		return this.cep  + logradouro + bairro;
 	}
 
 }

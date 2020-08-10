@@ -38,7 +38,6 @@ public class LoginScreen extends Application {
                 primaryStage.setX(event.getScreenX() - xOffset);
                 primaryStage.setY(event.getScreenY() - yOffset);
                 primaryStage.setOpacity(0.7);
-
             }
         });
 

@@ -106,7 +106,7 @@ error to be generated. Malformed JSON Texts such as missing end " (quote) on str
 invalid number formats (1.2e6.3) will cause errors as such documents can not be read
 reliably.
 
-Some notible exceptions that the JSON Parser in this library accepts are:
+Some notible validator.exceptions that the JSON Parser in this library accepts are:
 * Unquoted keys `{ key: "value" }`
 * Unquoted values `{ "key": value }`
 * Unescaped literals like "tab" in string values `{ "key": "value   with an unescaped tab" }`
