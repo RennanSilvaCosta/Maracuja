@@ -15,9 +15,7 @@
       <Pane layoutX="350.0" prefHeight="475.0" prefWidth="350.0" style="-fx-background-color: white;">
          <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="28.0" layoutY="25.0" pickOnBounds="true"
                     preserveRatio="true">
-            <image>
-               <Image url="@../icons/maracuja_icon_black.png"/>
-            </image>
+            <Image url="@../icons/maracuja_icon_black.png"/>
          </ImageView>
          <JFXButton fx:id="btnSair" layoutX="329.0" onMouseClicked="#encerrarAplicacao"
                     stylesheets="@../stylesheets/styleButton.css" text="x" textAlignment="CENTER"/>
@@ -67,9 +65,7 @@
       </Label>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="101.0" layoutY="132.0" pickOnBounds="true"
                  preserveRatio="true">
-         <image>
-            <Image url="@../icons/maracuja.png"/>
-         </image>
+         <Image url="@../icons/maracuja.png"/>
       </ImageView>
       <Label layoutX="202.0" layoutY="292.0" text="ao" textFill="WHITE">
          <font>
