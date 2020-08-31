@@ -7,13 +7,13 @@
 <?import javafx.scene.text.*?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="450.0" style="-fx-background-color: white;" stylesheets="/stylesheets/styleRegisterScreen.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerFXMLTelaCadastro">
-   <JFXButton fx:id="btnSair" layoutX="427.0" onAction="#sair" stylesheets="@../stylesheets/styleButton.css" text="X">
+   <JFXButton fx:id="btnSair" layoutX="427.0" onAction="#sair" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="X">
       <font>
          <Font name="Ebrima" size="12.0" />
       </font>
    </JFXButton>
     <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="29.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
-        <Image url="@../icons/icon_maracuja_black.png"/>
+        <Image url="@../icons/icon_maracuja_black.png" />
     </ImageView>
    <Label layoutX="29.0" layoutY="91.0" text="Crie sua conta" textFill="#545454">
       <font>

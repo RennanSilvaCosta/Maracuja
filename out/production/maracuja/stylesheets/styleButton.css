@@ -24,3 +24,13 @@
     -fx-border-style: solid;
     -fx-border-radius: 10px;
 }
+
+.btnEsqueceu:hover {
+    -fx-text-fill: #6747CD;
+    -fx-underline: true;
+}
+
+.btnCadastrar:hover {
+    -fx-text-fill: #6747CD;
+    -fx-underline: true;
+}

@@ -18,7 +18,10 @@ import util.MaskField;
 
 import java.io.*;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class ControllerFXMLTelaPrincipal implements Initializable {
 
@@ -51,7 +54,6 @@ public class ControllerFXMLTelaPrincipal implements Initializable {
     }
 
     public void clickItemList() {
-
         switch (listViewMainMenu.getSelectionModel().getSelectedIndex()) {
             case 0:
                 System.out.println("Importa CSV");
@@ -65,7 +67,6 @@ public class ControllerFXMLTelaPrincipal implements Initializable {
                 System.out.println("Configurações");
                 break;
         }
-
     }
 
     @FXML
@@ -99,21 +100,17 @@ public class ControllerFXMLTelaPrincipal implements Initializable {
 
     public void initializeListViewMainMenu() {
         try {
-            itemListView = new Label("Importar CSV");
-            itemListView.setGraphic(new ImageView(new Image(new FileInputStream("C:\\Users\\renna\\IdeaProjects\\maracuja\\src\\icons\\mainmenu\\icon_import_csv.png"))));
-            itemListView.setGraphicTextGap(20);
-            listViewMainMenu.getItems().add(itemListView);
+            Map<String, String> itemList = new HashMap<>();
+            itemList.put("Importar CSV", "C:\\Users\\renna\\IdeaProjects\\maracuja\\src\\icons\\mainmenu\\icon_import_csv.png");
+            itemList.put("Gerenciar CEP's", "C:\\Users\\renna\\IdeaProjects\\maracuja\\src\\icons\\mainmenu\\icon_folder.png");
+            itemList.put("Configurações", "C:\\Users\\renna\\IdeaProjects\\maracuja\\src\\icons\\mainmenu\\icon_gear.png");
 
-            itemListView = new Label("Gerenciar CEP's");
-            itemListView.setGraphic(new ImageView(new Image(new FileInputStream("C:\\Users\\renna\\IdeaProjects\\maracuja\\src\\icons\\mainmenu\\icon_folder.png"))));
-            itemListView.setGraphicTextGap(20);
-            listViewMainMenu.getItems().add(itemListView);
-
-            itemListView = new Label("Configurações");
-            itemListView.setGraphic(new ImageView(new Image(new FileInputStream("C:\\Users\\renna\\IdeaProjects\\maracuja\\src\\icons\\mainmenu\\icon_gear.png"))));
-            itemListView.setGraphicTextGap(20);
-            listViewMainMenu.getItems().add(itemListView);
-
+            for (String labelsItemList : itemList.keySet()) {
+                itemListView = new Label(labelsItemList);
+                itemListView.setGraphic(new ImageView(new Image(new FileInputStream(itemList.get(labelsItemList)))));
+                itemListView.setGraphicTextGap(20);
+                listViewMainMenu.getItems().add(itemListView);
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
