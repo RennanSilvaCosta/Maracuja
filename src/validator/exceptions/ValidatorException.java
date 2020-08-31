@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class ValidatorException extends RuntimeException {
 
-    private Map<String, String> errors = new HashMap<>();
+    private final Map<String, String> errors = new HashMap<>();
 
     public ValidatorException() {
     }

@@ -66,6 +66,31 @@ public class HttpClient {
         return response.toString();
     }
 
+    public String autenticated(String url,String json ,String method)  throws SocketException, IOException {
+
+        URL obj = new URL(url);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+        con.setRequestMethod(method);
+        con.setRequestProperty("User-Agent", Constantes.getUserAgent());
+        con.setRequestProperty("Accept-Charset", "ISO-8859-1");
+        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5,pt-br");
+        con.setRequestProperty("Content-Type", "application/json;charset=ISO-8859-1");
+
+        con.setDoOutput(true);
+        OutputStreamWriter out = new OutputStreamWriter(con.getOutputStream());
+        out.write(json);
+        out.flush();
+        out.close();
+
+        int responseCode = con.getResponseCode();
+        System.out.println("\nSending 'POST' request to URL : " + url);
+        System.out.println("Submit JSON: " +json);
+        System.out.println("Response Code : " + responseCode);
+
+        return null;
+    }
+
 
 
 
