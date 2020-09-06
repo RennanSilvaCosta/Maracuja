@@ -18,19 +18,21 @@
                <Font size="14.0" />
             </font>
          </JFXTextField>
-         <JFXPasswordField fx:id="txtSenha" focusColor="#ffb300" labelFloat="true" layoutX="50.0" layoutY="227.0" prefHeight="25.0" prefWidth="250.0" promptText="Senha" unFocusColor="#ffca28">
+         <Label fx:id="labelEmailError" layoutX="50.0" layoutY="205.0" textFill="RED" />
+         <JFXPasswordField fx:id="txtSenha" focusColor="#ffb300" labelFloat="true" layoutX="50.0" layoutY="238.0" prefHeight="25.0" prefWidth="250.0" promptText="Senha" unFocusColor="#ffca28">
             <font>
                <Font size="14.0" />
             </font>
          </JFXPasswordField>
-         <Label fx:id="btnEsqueceu" layoutX="200.0" layoutY="275.0" styleClass="btnEsqueceu" stylesheets="@../stylesheets/styleButton.css" text="Esqueceu a senha?" textFill="#a3a3a3" />
-         <JFXButton fx:id="btnlogin" layoutX="50.0" layoutY="318.0" onAction="#login" prefHeight="50.0" prefWidth="250.0" styleClass="btnForm" stylesheets="@../stylesheets/styleButton.css" text="Entrar">
+         <Label fx:id="labelSenhaError" layoutX="50.0" layoutY="268.0" textFill="RED" />
+         <Label fx:id="btnEsqueceu" layoutX="200.0" layoutY="290.0" styleClass="btnEsqueceu" stylesheets="@../stylesheets/styleButton.css" text="Esqueceu a senha?" textFill="#a3a3a3" />
+         <JFXButton fx:id="btnlogin" layoutX="50.0" layoutY="333.0" onAction="#login" prefHeight="50.0" prefWidth="250.0" styleClass="btnForm" stylesheets="@../stylesheets/styleButton.css" text="Entrar">
             <font>
                <Font name="Ebrima" size="14.0" />
             </font>
          </JFXButton>
-         <Label layoutX="96.0" layoutY="389.0" text="Usuario novo?" textFill="#a3a3a3" />
-         <Label fx:id="btnCadastrar" layoutX="176.0" layoutY="389.0" onMouseClicked="#register" text="Cadastre-se" textFill="#a3a3a3" />
+         <Label layoutX="96.0" layoutY="404.0" text="Usuario novo?" textFill="#a3a3a3" />
+         <Label fx:id="btnCadastrar" layoutX="176.0" layoutY="404.0" onMouseClicked="#openRegisterScreen" text="Cadastre-se" textFill="#a3a3a3" />
          <Label layoutX="28.0" layoutY="89.0" text="Bem-vindo de volta" textFill="#575757">
             <font>
                <Font name="Ebrima Bold" size="24.0" />

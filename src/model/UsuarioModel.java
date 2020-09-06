@@ -11,8 +11,9 @@ public class UsuarioModel implements Serializable {
     private String nome;
     private String email;
     private List<PerfilUsuario> perfil;
+    private EmpresaModel empresa;
 
-    public  UsuarioModel() {
+    public UsuarioModel() {
     }
 
     public UsuarioModel(String nome, String email) {
@@ -52,6 +53,14 @@ public class UsuarioModel implements Serializable {
         this.perfil = perfil;
     }
 
+    public EmpresaModel getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(EmpresaModel empresa) {
+        this.empresa = empresa;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -75,5 +84,10 @@ public class UsuarioModel implements Serializable {
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return this.id + " " + this.nome + " " + this.email;
     }
 }

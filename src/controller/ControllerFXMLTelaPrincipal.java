@@ -1,6 +1,5 @@
 package controller;
 
-import animatefx.animation.Pulse;
 import com.jfoenix.controls.JFXListView;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -14,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
+import model.UsuarioModel;
 import util.MaskField;
 
 import java.io.*;
@@ -21,7 +21,6 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 public class ControllerFXMLTelaPrincipal implements Initializable {
 
@@ -71,7 +70,6 @@ public class ControllerFXMLTelaPrincipal implements Initializable {
 
     @FXML
     private void searchCEP(KeyEvent ke) {
-
         switch (ke.getCode()) {
             case ENTER:
                 System.out.println("Buscar CEP");
@@ -79,17 +77,15 @@ public class ControllerFXMLTelaPrincipal implements Initializable {
         }
     }
 
-    public void importCSV(){
+    public void importCSV() {
         FileChooser fl = new FileChooser();
         fl.setTitle("Selecione um arquivo");
         fl.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
-
         File selecteFile = fl.showOpenDialog(null);
         String patch = selecteFile.getPath();
-
-        try  (BufferedReader br = new BufferedReader(new FileReader(patch))){
+        try (BufferedReader br = new BufferedReader(new FileReader(patch))) {
             String line = br.readLine();
-            while (line != null){
+            while (line != null) {
                 System.out.println(line);
                 line = br.readLine();
             }
@@ -116,8 +112,14 @@ public class ControllerFXMLTelaPrincipal implements Initializable {
         }
     }
 
+    public void initializeInfoUser(UsuarioModel user) {
+        txtEmailUsuario.setText(user.getEmail());
+        txtNomeUsuario.setText(user.getNome());
+        txtNomeEmpresa.setText(user.getEmpresa().getNome());
+    }
+
     @FXML
-    private void encerrarAplicacao(){
+    private void encerrarAplicacao() {
         Platform.exit();
     }
 }
