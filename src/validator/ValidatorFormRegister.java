@@ -7,7 +7,7 @@ import java.util.Map;
 
 import static util.Constantes.*;
 
-public class Validator {
+public class ValidatorFormRegister {
 
     ValidatorException exception = new ValidatorException();
 

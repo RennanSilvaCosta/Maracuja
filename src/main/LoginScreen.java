@@ -16,8 +16,8 @@ public class LoginScreen extends Application {
     private double yOffset = 0;
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/LoginScreen.fxml"));
         Scene scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
         primaryStage.initStyle(StageStyle.TRANSPARENT);

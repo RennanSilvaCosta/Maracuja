@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import service.UsuarioService;
-import validator.Validator;
+import validator.ValidatorFormRegister;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,9 +33,8 @@ public class ControllerFXMLTelaCadastro {
 
     Map<String, String> errors = new HashMap<>();
 
-    Validator validator = new Validator();
+    ValidatorFormRegister validatorFormRegister = new ValidatorFormRegister();
     UsuarioService usuarioService = new UsuarioService();
-    NewUserDTO userDTO;
 
     public void sair() {
         Stage stage = (Stage) btnSair.getScene().getWindow();
@@ -43,19 +42,15 @@ public class ControllerFXMLTelaCadastro {
     }
 
     public boolean criarNovaConta() {
-
         btnCriarConta.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-
                 errors.clear();
                 clearLabelsErrors();
                 alterColorInputsForDefault();
-                errors = validator.registrationFormValidation(txtNomeEmpresa.getText(), txtNomeUsuario.getText(), txtEmail.getText(), txtSenha.getText(), txtConfirmarSenha.getText());
-
+                errors = validatorFormRegister.registrationFormValidation(txtNomeEmpresa.getText(), txtNomeUsuario.getText(), txtEmail.getText(), txtSenha.getText(), txtConfirmarSenha.getText());
                 if (errors.isEmpty()) {
-                    new NewUserDTO(txtNomeEmpresa.getText(), txtNomeUsuario.getText(), txtEmail.getText(), txtSenha.getText());
-                    usuarioService.criarNovoUsuario(userDTO);
+                    usuarioService.criarNovoUsuario(new NewUserDTO(txtNomeEmpresa.getText(), txtNomeUsuario.getText(), txtEmail.getText(), txtSenha.getText()));
                 } else {
                     setErrorMessages(errors);
                 }

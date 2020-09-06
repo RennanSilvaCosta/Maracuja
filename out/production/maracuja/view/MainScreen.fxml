@@ -60,17 +60,17 @@
                 <Image url="@../icons/icon_maracuja_black.png" />
             </ImageView>
             <JFXListView fx:id="listViewMainMenu" layoutY="144.0" onMouseClicked="#clickItemList" prefHeight="155.0" prefWidth="265.0" stylesheets="@../stylesheets/styleListView.css" />
-            <Label fx:id="txtNomeUsuario" layoutX="13.0" layoutY="88.0" prefHeight="23.0" prefWidth="240.0" text="Rennan Silva Costa" textFill="#545454">
+            <Label fx:id="txtNomeUsuario" layoutX="13.0" layoutY="88.0" prefHeight="23.0" prefWidth="240.0" textFill="#545454">
                 <font>
                     <Font name="Ebrima Bold" size="18.0" />
                 </font>
             </Label>
-            <Label fx:id="txtEmailUsuario" layoutX="13.0" layoutY="111.0" prefHeight="23.0" prefWidth="240.0" text="rennansilvacosta@hotmail.com" textFill="#545454">
+            <Label fx:id="txtEmailUsuario" layoutX="13.0" layoutY="111.0" prefHeight="23.0" prefWidth="240.0" textFill="#545454">
                 <font>
                     <Font name="Ebrima" size="13.0" />
                 </font>
             </Label>
-            <Label fx:id="txtNomeEmpresa" alignment="CENTER_RIGHT" contentDisplay="TOP" layoutX="93.0" layoutY="14.0" prefHeight="23.0" prefWidth="160.0" text="Spark" textFill="#545454">
+            <Label fx:id="txtNomeEmpresa" alignment="CENTER_RIGHT" contentDisplay="TOP" layoutX="93.0" layoutY="14.0" prefHeight="23.0" prefWidth="160.0" textFill="#545454">
                 <font>
                     <Font name="Ebrima Bold" size="18.0" />
                 </font>
