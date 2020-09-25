@@ -53,7 +53,7 @@ public class EnderecoModel implements Serializable {
 
 	@Override
 	public String toString() {
-		return this.cep  + logradouro + bairro;
+		return this.cep  + " " + logradouro + " " + bairro;
 	}
 
 }
