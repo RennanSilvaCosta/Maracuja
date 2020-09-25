@@ -1,5 +1,6 @@
 package controller;
 
+import animatefx.animation.*;
 import com.jfoenix.controls.JFXListView;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -10,17 +11,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
+import model.EnderecoModel;
 import model.UsuarioModel;
+import service.EnderecoService;
 import util.MaskField;
 
 import java.io.*;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ControllerFXMLTelaPrincipal implements Initializable {
 
@@ -47,6 +49,8 @@ public class ControllerFXMLTelaPrincipal implements Initializable {
 
     Label itemListView;
 
+    EnderecoService enderecoService = new EnderecoService();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeListViewMainMenu();
@@ -56,6 +60,7 @@ public class ControllerFXMLTelaPrincipal implements Initializable {
         switch (listViewMainMenu.getSelectionModel().getSelectedIndex()) {
             case 0:
                 System.out.println("Importa CSV");
+                importCSV();
                 break;
 
             case 1:
@@ -70,10 +75,24 @@ public class ControllerFXMLTelaPrincipal implements Initializable {
 
     @FXML
     private void searchCEP(KeyEvent ke) {
-        switch (ke.getCode()) {
-            case ENTER:
-                System.out.println("Buscar CEP");
-
+        if (ke.getCode() == KeyCode.ENTER) {
+            EnderecoModel endereco =  enderecoService.searchCepApiMaracuja(txtCEP.getText());
+            if (endereco != null){
+                txtLougradouro.setText(endereco.getLogradouro());
+                txtBairro.setText(endereco.getBairro());
+                paneResposta.setVisible(true);
+                txtResultado.setText("Com Estrutura");
+                paneResposta.setStyle("-fx-background-color: #86C60F; -fx-background-radius: 0 0 18 0;");
+                new SlideInLeft(paneResposta).play();
+            }else {
+                endereco = enderecoService.searchCepWithViaCep(txtCEP.getText());
+                txtLougradouro.setText(endereco.getLogradouro());
+                txtBairro.setText(endereco.getBairro());
+                paneResposta.setVisible(true);
+                txtResultado.setText("Sem estrutura");
+                paneResposta.setStyle("-fx-background-color: #FD1810; -fx-background-radius: 0 0 18 0;");
+                new SlideInLeft(paneResposta).play();
+            }
         }
     }
 
@@ -82,16 +101,21 @@ public class ControllerFXMLTelaPrincipal implements Initializable {
         fl.setTitle("Selecione um arquivo");
         fl.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
         File selecteFile = fl.showOpenDialog(null);
-        String patch = selecteFile.getPath();
-        try (BufferedReader br = new BufferedReader(new FileReader(patch))) {
-            String line = br.readLine();
-            while (line != null) {
-                System.out.println(line);
-                line = br.readLine();
+        List<String> ceps = new ArrayList<>();
+
+        if (selecteFile != null) {
+            String patch = selecteFile.getPath();
+            try (BufferedReader br = new BufferedReader(new FileReader(patch))) {
+                String line = br.readLine();
+                while (line != null) {
+                    ceps.add(line);
+                    line = br.readLine();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+        enderecoService.addNewCep(ceps);
     }
 
     public void initializeListViewMainMenu() {
@@ -102,6 +126,7 @@ public class ControllerFXMLTelaPrincipal implements Initializable {
             itemList.put("Configurações", "C:\\Users\\renna\\IdeaProjects\\maracuja\\src\\icons\\mainmenu\\icon_gear.png");
 
             for (String labelsItemList : itemList.keySet()) {
+                System.out.println(labelsItemList);
                 itemListView = new Label(labelsItemList);
                 itemListView.setGraphic(new ImageView(new Image(new FileInputStream(itemList.get(labelsItemList)))));
                 itemListView.setGraphicTextGap(20);

@@ -13,7 +13,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Map;
 
-public class HttpClient {
+public class HttpUsuario {
 
     public String sendGET(String url, String method, String token) throws IOException {
         URL obj = new URL(url);
@@ -39,7 +39,7 @@ public class HttpClient {
         return response.toString();
     }
 
-    public String sendGET(String url, String method) throws SocketException, IOException {
+    public String sendGET(String url, String method) throws IOException {
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod(method);
@@ -63,7 +63,7 @@ public class HttpClient {
         return response.toString();
     }
 
-    public String sendPOST(String url, String json, String method) throws SocketException, IOException {
+    public String sendPOST(String url, String json, String method) throws IOException {
 
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -96,7 +96,7 @@ public class HttpClient {
         return response.toString();
     }
 
-    public Map<Integer, String> autenticated(String url, String json, String method) throws SocketException, IOException {
+    public Map<Integer, String> autenticated(String url, String json, String method) throws IOException {
         HttpResponse response = new HttpResponse();
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -128,5 +128,23 @@ public class HttpClient {
             response.addResponse(responseCode, "Algo deu errado, tente novamente mais tarde");
             return response.getResponse();
         }
+    }
+
+    public String refreshToken(String url, String method) throws IOException {
+        URL obj = new URL(url);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+        con.setRequestMethod(method);
+        con.setRequestProperty("User-Agent", Constantes.getUserAgent());
+        con.setRequestProperty("Accept-Charset", "ISO-8859-1");
+        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5,pt-br");
+        con.setRequestProperty("Content-Type", "application/json;charset=ISO-8859-1");
+
+        con.setDoOutput(true);
+        int responseCode = con.getResponseCode();
+        System.out.println("\nSending 'POST' request to URL : " + url);
+        System.out.println("Response Code : " + responseCode);
+
+        return con.getHeaderField("Authorization");
     }
 }

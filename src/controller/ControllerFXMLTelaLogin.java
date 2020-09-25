@@ -3,6 +3,7 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import dao.UsuarioDAO;
 import dto.CredenciaisDTO;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -43,6 +44,7 @@ public class ControllerFXMLTelaLogin {
     @FXML
     JFXButton btnlogin = new JFXButton();
 
+    UsuarioDAO dao = new UsuarioDAO();
     ValidatorFormLogin validatorFormLogin = new ValidatorFormLogin();
     Map<Integer, String> response = new HashMap<>();
     Map<String, String> erros = new HashMap<>();
@@ -55,14 +57,14 @@ public class ControllerFXMLTelaLogin {
 
         erros.clear();
         erros = validatorFormLogin.loginFormValidation(txtEmail.getText(), txtSenha.getText());
-
         if (erros.isEmpty()) {
             cred.setEmail(txtEmail.getText());
             cred.setSenha(txtSenha.getText());
             response.clear();
-            response = usuarioService.efetuarLogin(cred);
+            response = usuarioService.logIn(cred);
             if (response.containsKey(200)) {
                 //popular objeto usuario e enviar para a tela principal
+                dao.saveToken(response.get(200));
                 user = usuarioService.getUserLogged(response.get(200));
                 loadNewViewAndCloseOld("/view/MainScreen.fxml", btnlogin, user);
             } else {

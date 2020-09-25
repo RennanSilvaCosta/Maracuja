@@ -50,7 +50,7 @@ public class ControllerFXMLTelaCadastro {
                 alterColorInputsForDefault();
                 errors = validatorFormRegister.registrationFormValidation(txtNomeEmpresa.getText(), txtNomeUsuario.getText(), txtEmail.getText(), txtSenha.getText(), txtConfirmarSenha.getText());
                 if (errors.isEmpty()) {
-                    usuarioService.criarNovoUsuario(new NewUserDTO(txtNomeEmpresa.getText(), txtNomeUsuario.getText(), txtEmail.getText(), txtSenha.getText()));
+                    usuarioService.createNewUser(new NewUserDTO(txtNomeEmpresa.getText(), txtNomeUsuario.getText(), txtEmail.getText(), txtSenha.getText()));
                 } else {
                     setErrorMessages(errors);
                 }
