@@ -13,7 +13,7 @@
             <Label layoutX="27.0" layoutY="6.0" prefHeight="17.0" prefWidth="215.0" text="Você pode adicionar este CEP, clicando" />
             <Hyperlink fx:id="addCEP" layoutX="234.0" layoutY="3.0" text="aqui" />
         </Pane>
-        <MaskField fx:id="txtCEP" layoutX="317.0" layoutY="69.0" mask="DDDDDDDD" onKeyReleased="#searchCEP" prefHeight="45.0" prefWidth="350.0" text="_____-___">
+        <MaskField fx:id="txtCEP" layoutX="317.0" layoutY="69.0" mask="DDDDD-DDD" onKeyReleased="#searchCEP" prefHeight="45.0" prefWidth="350.0" text="_____-___">
             <font>
                 <Font size="14.0" />
             </font>
@@ -33,8 +33,8 @@
                 <Font size="14.0" />
             </font>
         </TextField>
-        <Pane fx:id="paneResposta" layoutX="245.0" prefHeight="35.0" prefWidth="260.0" style="-fx-background-color: #86C60F; -fx-background-radius: 0 0 18 0;" visible="false">
-            <Label fx:id="txtResultado" alignment="CENTER" layoutX="66.0" layoutY="9.0" nodeOrientation="LEFT_TO_RIGHT" text="TEMOS ESTRUTURA" textAlignment="CENTER" textFill="WHITE">
+        <Pane fx:id="paneResposta" layoutX="265.0" prefHeight="35.0" prefWidth="240.0" visible="false" style="-fx-background-color: #86C60F; -fx-background-radius: 0 0 18 0;">
+            <Label fx:id="txtResultado" alignment="CENTER" layoutX="65.0" layoutY="8.0" nodeOrientation="LEFT_TO_RIGHT" textAlignment="CENTER" textFill="WHITE">
                 <font>
                     <Font name="Maiandra GD" size="14.0" />
                 </font>
@@ -59,7 +59,7 @@
             <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../icons/icon_maracuja_black.png" />
             </ImageView>
-            <JFXListView fx:id="listViewMainMenu" layoutY="144.0" onMouseClicked="#clickItemList" prefHeight="155.0" prefWidth="265.0" stylesheets="@../stylesheets/styleListView.css" />
+            <JFXListView fx:id="listViewMainMenu" layoutY="144.0" onMouseClicked="#clickItemList" prefHeight="210.0" prefWidth="265.0" stylesheets="@../stylesheets/styleListView.css" />
             <Label fx:id="txtNomeUsuario" layoutX="13.0" layoutY="88.0" prefHeight="23.0" prefWidth="240.0" textFill="#545454">
                 <font>
                     <Font name="Ebrima Bold" size="18.0" />
