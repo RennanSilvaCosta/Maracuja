@@ -73,6 +73,7 @@ public class HttpUsuario {
         con.setRequestProperty("Accept-Charset", "ISO-8859-1");
         con.setRequestProperty("Accept-Language", "en-US,en;q=0.5,pt-br");
         con.setRequestProperty("Content-Type", "application/json;charset=ISO-8859-1");
+        con.setRequestProperty("Authorization", "");
 
         con.setDoOutput(true);
         OutputStreamWriter out = new OutputStreamWriter(con.getOutputStream());

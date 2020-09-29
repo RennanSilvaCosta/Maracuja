@@ -126,7 +126,6 @@ public class ControllerFXMLTelaPrincipal implements Initializable {
             itemList.put("Configurações", "C:\\Users\\renna\\IdeaProjects\\maracuja\\src\\icons\\mainmenu\\icon_gear.png");
 
             for (String labelsItemList : itemList.keySet()) {
-                System.out.println(labelsItemList);
                 itemListView = new Label(labelsItemList);
                 itemListView.setGraphic(new ImageView(new Image(new FileInputStream(itemList.get(labelsItemList)))));
                 itemListView.setGraphicTextGap(20);

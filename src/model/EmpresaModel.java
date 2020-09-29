@@ -50,4 +50,12 @@ public class EmpresaModel implements Serializable {
     public void setEnderecos(List<EnderecoModel> enderecos) {
         this.enderecos = enderecos;
     }
+
+    @Override
+    public String toString() {
+        return "EmpresaModel{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                '}';
+    }
 }
