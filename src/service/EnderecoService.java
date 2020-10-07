@@ -21,7 +21,7 @@ public class EnderecoService {
     private Type listEnderecoType = new TypeToken<List<EnderecoModel>>() {
     }.getType();
 
-    public EnderecoModel searchCepWithViaCep(String cep) {
+    public EnderecoModel getCepViaCep(String cep) {
         try {
             return gson.fromJson(httpEndereco.sendGET(Constantes.URL_VIA_CEP + cep + "/json", Constantes.getGET()), EnderecoModel.class);
         } catch (IOException e) {
@@ -30,7 +30,7 @@ public class EnderecoService {
         return null;
     }
 
-    public EnderecoModel searchCepApiMaracuja(String cep) {
+    public EnderecoModel getCepApiMaracuja(String cep) {
         UsuarioService usuarioService = new UsuarioService();
         UsuarioDAO dao = new UsuarioDAO();
         try {
@@ -58,6 +58,26 @@ public class EnderecoService {
                 e.printStackTrace();
             }
         }
+        return null;
+    }
+
+    public List<EnderecoModel> getAll() {
+
+        UsuarioModel user;
+        UsuarioService userServicer = new UsuarioService();
+        UsuarioDAO dao = new UsuarioDAO();
+
+        String token = dao.getToken();
+        user = userServicer.getUserLogged(token);
+
+        try {
+            List<EnderecoModel> end = new Gson().fromJson(httpEndereco.sendGET(Constantes.URL_BASE_LOCAL + "/enderecos/" + user.getEmpresa().getId(), Constantes.getGET()), listEnderecoType);
+            return end;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 }

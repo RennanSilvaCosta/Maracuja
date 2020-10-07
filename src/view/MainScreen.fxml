@@ -7,7 +7,7 @@
 <?import javafx.scene.text.*?>
 <?import util.*?>
 
-<Pane depthTest="ENABLE" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="750.0" prefWidth="970.0" style="-fx-background-color: transparent;" stylesheets="/stylesheets/styleMainScreen.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerFXMLTelaPrincipal">
+<Pane depthTest="ENABLE" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="750.0" prefWidth="970.0" style="-fx-background-color: transparent;" stylesheets="/stylesheets/styleMainScreen.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerMainScreen">
     <Pane fx:id="paneMain" layoutX="47.0" layoutY="200.0" prefHeight="350.0" prefWidth="720.0" style="-fx-background-radius: 18 18 18 18;" stylesheets="@../stylesheets/styleMainScreen.css">
         <Pane fx:id="paneAddNewCep" layoutX="367.0" layoutY="71.0" prefHeight="29.0" prefWidth="300.0" style="-fx-background-color: #FFFD38; -fx-background-radius: 18 18 0 0;">
             <Label layoutX="27.0" layoutY="6.0" prefHeight="17.0" prefWidth="215.0" text="Você pode adicionar este CEP, clicando" />

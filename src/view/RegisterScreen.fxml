@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="450.0" style="-fx-background-color: white;" stylesheets="@../stylesheets/styleRegisterScreen.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerFXMLTelaCadastro">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="450.0" style="-fx-background-color: white;" stylesheets="@../stylesheets/styleRegisterScreen.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRegisterScreen">
    <JFXButton fx:id="btnSair" layoutX="427.0" onAction="#sair" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="X">
       <font>
          <Font name="Ebrima" size="12.0" />

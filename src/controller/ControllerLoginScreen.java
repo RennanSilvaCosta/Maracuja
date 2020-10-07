@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class ControllerFXMLTelaLogin {
+public class ControllerLoginScreen {
 
     private double xOffset = 0;
     private double yOffset = 0;
@@ -83,7 +83,7 @@ public class ControllerFXMLTelaLogin {
             Parent parent = fxmlLoader.load();
             Stage stage = new Stage();
             Scene scene = new Scene(parent);
-            ControllerFXMLTelaPrincipal tela = fxmlLoader.getController();
+            ControllerMainScreen tela = fxmlLoader.getController();
             tela.initializeInfoUser(user);
 
             scene.setFill(Color.TRANSPARENT);

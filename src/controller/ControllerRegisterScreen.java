@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import service.UsuarioService;
@@ -17,7 +18,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class ControllerFXMLTelaCadastro {
+public class ControllerRegisterScreen {
+
+    @FXML
+    ProgressIndicator progress;
 
     @FXML
     JFXButton btnSair, btnCriarConta;
@@ -36,11 +40,6 @@ public class ControllerFXMLTelaCadastro {
     ValidatorFormRegister validatorFormRegister = new ValidatorFormRegister();
     UsuarioService usuarioService = new UsuarioService();
 
-    public void sair() {
-        Stage stage = (Stage) btnSair.getScene().getWindow();
-        stage.close();
-    }
-
     public boolean criarNovaConta() {
         btnCriarConta.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -50,7 +49,7 @@ public class ControllerFXMLTelaCadastro {
                 alterColorInputsForDefault();
                 errors = validatorFormRegister.registrationFormValidation(txtNomeEmpresa.getText(), txtNomeUsuario.getText(), txtEmail.getText(), txtSenha.getText(), txtConfirmarSenha.getText());
                 if (errors.isEmpty()) {
-                    usuarioService.createNewUser(new NewUserDTO(txtNomeEmpresa.getText(), txtNomeUsuario.getText(), txtEmail.getText(), txtSenha.getText()));
+                   usuarioService.createNewUser(new NewUserDTO(txtNomeEmpresa.getText(), txtNomeUsuario.getText(), txtEmail.getText(), txtSenha.getText()));
                 } else {
                     setErrorMessages(errors);
                 }
@@ -102,5 +101,10 @@ public class ControllerFXMLTelaCadastro {
         txtEmail.setUnFocusColor(Paint.valueOf(colorYellow));
         txtSenha.setUnFocusColor(Paint.valueOf(colorYellow));
         txtConfirmarSenha.setUnFocusColor(Paint.valueOf(colorYellow));
+    }
+
+    public void sair() {
+        Stage stage = (Stage) btnSair.getScene().getWindow();
+        stage.close();
     }
 }

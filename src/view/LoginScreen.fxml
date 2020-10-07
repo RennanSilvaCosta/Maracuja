@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane depthTest="ENABLE" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="604.0" prefWidth="846.0" style="-fx-background-color: transparent;" stylesheets="/stylesheets/styleLoginScreen.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerFXMLTelaLogin">
+<Pane depthTest="ENABLE" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="604.0" prefWidth="846.0" style="-fx-background-color: transparent;" stylesheets="/stylesheets/styleLoginScreen.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerLoginScreen">
    <Pane fx:id="paneMain" layoutX="73.0" layoutY="65.0" prefHeight="475.0" prefWidth="700.0" stylesheets="@../stylesheets/styleLoginScreen.css">
       <Pane layoutX="350.0" prefHeight="475.0" prefWidth="350.0" style="-fx-background-color: white;">
          <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="28.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
