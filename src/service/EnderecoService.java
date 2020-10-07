@@ -62,22 +62,16 @@ public class EnderecoService {
     }
 
     public List<EnderecoModel> getAll() {
-
         UsuarioModel user;
         UsuarioService userServicer = new UsuarioService();
         UsuarioDAO dao = new UsuarioDAO();
-
         String token = dao.getToken();
         user = userServicer.getUserLogged(token);
-
         try {
-            List<EnderecoModel> end = new Gson().fromJson(httpEndereco.sendGET(Constantes.URL_BASE_LOCAL + "/enderecos/" + user.getEmpresa().getId(), Constantes.getGET()), listEnderecoType);
-            return end;
-
+            return new Gson().fromJson(httpEndereco.sendGET(Constantes.URL_BASE_LOCAL + "/enderecos/" + user.getEmpresa().getId(), Constantes.getGET()), listEnderecoType);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 }
