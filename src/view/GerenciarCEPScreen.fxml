@@ -6,10 +6,12 @@
 
 <Pane prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerGerenciarCEPScreen">
    <Pane layoutX="24.0" layoutY="117.0" prefHeight="504.0" prefWidth="853.0">
-      <children>
-          <JFXTreeTableView fx:id="treeView" editable="true" prefHeight="500.0" prefWidth="850.0" stylesheets="@../stylesheets/styleTreeTableView.css" />
-      </children>
+      <JFXTreeTableView fx:id="treeView" editable="true" prefHeight="500.0" prefWidth="850.0" stylesheets="@../stylesheets/styleTreeTableView.css" />
    </Pane>
-   <Button fx:id="btnSair" layoutX="877.0" mnemonicParsing="false" onAction="#sair" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="X" />
+   <JFXButton fx:id="btnSair" layoutX="877.0" mnemonicParsing="false" onAction="#sair" prefWidth="20.0" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="X" />
+   <Label layoutX="562.0" layoutY="80.0" text="Label" />
+   <JFXButton fx:id="btnProcurar" layoutX="296.0" layoutY="81.0" mnemonicParsing="false" text="Button" />
+
+   <TextField layoutX="32.0" layoutY="81.0" />
 
 </Pane>

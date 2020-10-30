@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane depthTest="ENABLE" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="604.0" prefWidth="846.0" onKeyPressed="#keyPressed" style="-fx-background-color: transparent;" stylesheets="/stylesheets/styleLoginScreen.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerLoginScreen">
+   <Pane fx:id="paneMain" layoutX="73.0" layoutY="65.0" prefHeight="475.0" prefWidth="700.0" stylesheets="@../stylesheets/styleLoginScreen.css">
+      <Pane layoutX="350.0" prefHeight="475.0" prefWidth="350.0" style="-fx-background-color: white;">
+         <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="28.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../icons/icon_maracuja_black.png" />
+         </ImageView>
+         <JFXButton fx:id="btnSair" layoutX="329.0" onMouseClicked="#encerrarAplicacao" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="x" textAlignment="CENTER" />
+         <JFXTextField fx:id="txtEmail" focusColor="#ffb200" labelFloat="true" layoutX="50.0" layoutY="175.0" prefHeight="25.0" prefWidth="250.0" promptText="Email" unFocusColor="#ffca28">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </JFXTextField>
+         <Label fx:id="labelEmailError" layoutX="50.0" layoutY="205.0" textFill="RED" />
+         <JFXPasswordField fx:id="txtSenha" focusColor="#ffb300" labelFloat="true" layoutX="50.0" layoutY="238.0" prefHeight="25.0" prefWidth="250.0" promptText="Senha" unFocusColor="#ffca28">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </JFXPasswordField>
+         <Label fx:id="labelSenhaError" layoutX="50.0" layoutY="268.0" textFill="RED" />
+         <Label fx:id="btnEsqueceu" layoutX="200.0" layoutY="290.0" styleClass="btnEsqueceu" stylesheets="@../stylesheets/styleButton.css" text="Esqueceu a senha?" textFill="#a3a3a3" />
+         <JFXButton fx:id="btnlogin" layoutX="50.0" layoutY="333.0" onAction="#login" prefHeight="50.0" prefWidth="250.0" styleClass="btnForm" stylesheets="@../stylesheets/styleButton.css" text="Entrar">
+            <font>
+               <Font name="Ebrima" size="14.0" />
+            </font>
+         </JFXButton>
+         <Label layoutX="96.0" layoutY="404.0" text="Usuario novo?" textFill="#a3a3a3" />
+         <Label fx:id="btnCadastrar" layoutX="176.0" layoutY="404.0" onMouseClicked="#openRegisterScreen" text="Cadastre-se" textFill="#a3a3a3" />
+         <Label layoutX="28.0" layoutY="89.0" text="Bem-vindo de volta" textFill="#575757">
+            <font>
+               <Font name="Ebrima Bold" size="24.0" />
+            </font>
+         </Label>
+         <Label layoutX="28.0" layoutY="120.0" text="Faça login para continuar" textFill="#a3a3a3">
+            <font>
+               <Font name="Ebrima" size="14.0" />
+            </font>
+         </Label>
+      </Pane>
+      <Label layoutX="123.0" layoutY="293.0" text="Bem-vindo" textFill="WHITE">
+         <font>
+            <Font name="Ebrima Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="117.0" layoutY="313.0" text="Maracujá" textFill="WHITE">
+         <font>
+            <Font name="Ebrima Bold" size="24.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="101.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../icons/icon_maracuja_512px.png" />
+      </ImageView>
+      <Label layoutX="202.0" layoutY="292.0" text="ao" textFill="WHITE">
+         <font>
+            <Font name="Ebrima" size="14.0" />
+         </font>
+      </Label>
+   </Pane>
+</Pane>

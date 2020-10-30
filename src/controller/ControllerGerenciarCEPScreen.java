@@ -11,7 +11,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.stage.Stage;
@@ -19,23 +18,25 @@ import model.EnderecoModel;
 import service.EnderecoService;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class ControllerGerenciarCEPScreen implements Initializable {
 
-    private double xOffset = 0;
-    private double yOffset = 0;
-
     @FXML
     private JFXTreeTableView<Endereco> treeView;
 
     @FXML
-    private Button btnSair;
+    private JFXButton btnSair;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        initializeTable();
+
+    }
+
+    private void initializeTable() {
         JFXTreeTableColumn<Endereco, String> cepColumn = new JFXTreeTableColumn<>("CEP");
         cepColumn.setPrefWidth(100);
         cepColumn.setMaxWidth(100);
@@ -81,7 +82,7 @@ public class ControllerGerenciarCEPScreen implements Initializable {
         treeView.setShowRoot(false);
     }
 
-    class Endereco extends RecursiveTreeObject<Endereco> {
+    static class Endereco extends RecursiveTreeObject<Endereco> {
         StringProperty cep;
         StringProperty logradouro;
         StringProperty bairro;

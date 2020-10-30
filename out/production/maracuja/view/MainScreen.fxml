@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import util.*?>
+
+<Pane depthTest="ENABLE" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="750.0" prefWidth="970.0" style="-fx-background-color: transparent;" stylesheets="/stylesheets/styleMainScreen.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerMainScreen">
+    <Pane fx:id="paneMain" layoutX="47.0" layoutY="200.0" prefHeight="350.0" prefWidth="720.0" style="-fx-background-radius: 18 18 18 18;" stylesheets="@../stylesheets/styleMainScreen.css">
+        <Pane fx:id="paneAddNewCep" layoutX="367.0" layoutY="71.0" prefHeight="29.0" prefWidth="300.0" style="-fx-background-color: #FFFD38; -fx-background-radius: 18 18 0 0;">
+            <Label layoutX="27.0" layoutY="6.0" prefHeight="17.0" prefWidth="215.0" text="Você pode adicionar este CEP, clicando" />
+            <Hyperlink fx:id="addCEP" layoutX="234.0" layoutY="3.0" text="aqui" />
+        </Pane>
+        <MaskField fx:id="txtCEP" layoutX="317.0" layoutY="69.0" mask="DDDDD-DDD" onKeyReleased="#searchCEP" prefHeight="45.0" prefWidth="350.0" text="_____-___">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </MaskField>
+        <Label layoutX="317.0" layoutY="49.0" text="CEP" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
+        <TextField fx:id="txtBairro" editable="false" layoutX="317.0" layoutY="144.0" prefHeight="45.0" prefWidth="350.0" promptText="Bairro">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </TextField>
+        <TextField fx:id="txtLougradouro" editable="false" layoutX="317.0" layoutY="224.0" prefHeight="45.0" prefWidth="350.0" promptText="Logradouro">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </TextField>
+        <Pane fx:id="paneResposta" layoutX="265.0" prefHeight="35.0" prefWidth="240.0" style="-fx-background-color: #86C60F; -fx-background-radius: 0 0 18 0;" visible="false">
+            <Label fx:id="txtResultado" alignment="CENTER" layoutX="65.0" layoutY="8.0" nodeOrientation="LEFT_TO_RIGHT" textAlignment="CENTER" textFill="WHITE">
+                <font>
+                    <Font name="Maiandra GD" size="14.0" />
+                </font>
+            </Label>
+        </Pane>
+        <Label layoutX="317.0" layoutY="124.0" text="Bairro" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="317.0" layoutY="203.0" text="Logradouro" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
+        <JFXButton fx:id="btnSair" layoutX="685.0" mnemonicParsing="false" onAction="#encerrarAplicacao" prefHeight="35.0" prefWidth="35.0" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="x" textAlignment="CENTER">
+            <font>
+                <Font name="Ebrima Bold" size="12.0" />
+            </font>
+        </JFXButton>
+        <Pane fx:id="paneColor" layoutY="-50.0" prefHeight="450.0" prefWidth="265.0" style="-fx-border-color: black; -fx-background-radius: 18 18 18 18; -fx-border-radius: 18 18 18 18;" stylesheets="@../stylesheets/styleMainScreen.css">
+            <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@../icons/icon_maracuja_black.png" />
+            </ImageView>
+            <JFXListView fx:id="listViewMainMenu" layoutY="144.0" onMouseClicked="#clickItemList" prefHeight="210.0" prefWidth="265.0" stylesheets="@../stylesheets/styleListView.css" />
+            <Label fx:id="txtNomeUsuario" layoutX="13.0" layoutY="88.0" prefHeight="23.0" prefWidth="240.0" textFill="#545454">
+                <font>
+                    <Font name="Ebrima Bold" size="18.0" />
+                </font>
+            </Label>
+            <Label fx:id="txtEmailUsuario" layoutX="13.0" layoutY="111.0" prefHeight="23.0" prefWidth="240.0" textFill="#545454">
+                <font>
+                    <Font name="Ebrima" size="13.0" />
+                </font>
+            </Label>
+            <Label fx:id="txtNomeEmpresa" alignment="CENTER_RIGHT" contentDisplay="TOP" layoutX="93.0" layoutY="14.0" prefHeight="23.0" prefWidth="160.0" textFill="#545454">
+                <font>
+                    <Font name="Ebrima Bold" size="18.0" />
+                </font>
+            </Label>
+        </Pane>
+      <ProgressIndicator fx:id="progressIndicator" layoutX="242.0" layoutY="92.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="150.0" visible="false" />
+    </Pane>
+</Pane>

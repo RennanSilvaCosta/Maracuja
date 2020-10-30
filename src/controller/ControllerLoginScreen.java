@@ -6,14 +6,14 @@ import com.jfoenix.controls.JFXTextField;
 import dao.UsuarioDAO;
 import dto.CredenciaisDTO;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -98,29 +98,18 @@ public class ControllerLoginScreen {
                 stage2.close();
             }
 
-            scene.setOnMousePressed(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    xOffset = event.getSceneX();
-                    yOffset = event.getSceneY();
-                }
+            scene.setOnMousePressed(event -> {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
             });
 
-            scene.setOnMouseDragged(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    stage.setX(event.getScreenX() - xOffset);
-                    stage.setY(event.getScreenY() - yOffset);
-                    stage.setOpacity(0.7);
-                }
+            scene.setOnMouseDragged(event -> {
+                stage.setX(event.getScreenX() - xOffset);
+                stage.setY(event.getScreenY() - yOffset);
+                stage.setOpacity(0.7);
             });
 
-            scene.setOnMouseReleased(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    stage.setOpacity(1);
-                }
-            });
+            scene.setOnMouseReleased(mouseEvent -> stage.setOpacity(1));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -149,29 +138,18 @@ public class ControllerLoginScreen {
                 stage2.close();
             }
 
-            scene.setOnMousePressed(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    xOffset = event.getSceneX();
-                    yOffset = event.getSceneY();
-                }
+            scene.setOnMousePressed(event -> {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
             });
 
-            scene.setOnMouseDragged(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    stage.setX(event.getScreenX() - xOffset);
-                    stage.setY(event.getScreenY() - yOffset);
-                    stage.setOpacity(0.7);
-                }
+            scene.setOnMouseDragged(event -> {
+                stage.setX(event.getScreenX() - xOffset);
+                stage.setY(event.getScreenY() - yOffset);
+                stage.setOpacity(0.7);
             });
 
-            scene.setOnMouseReleased(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    stage.setOpacity(1);
-                }
-            });
+            scene.setOnMouseReleased(mouseEvent -> stage.setOpacity(1));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -206,6 +184,13 @@ public class ControllerLoginScreen {
     private void clearLabelsErros() {
         labelEmailError.setText("");
         labelSenhaError.setText("");
+    }
+
+    @FXML
+    private void keyPressed(KeyEvent evt) {
+        if (evt.getCode() == KeyCode.ENTER) {
+            login();
+        }
     }
 
     @FXML

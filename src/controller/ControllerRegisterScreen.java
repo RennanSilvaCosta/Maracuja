@@ -4,9 +4,10 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import dto.NewUserDTO;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.paint.Paint;
@@ -41,18 +42,16 @@ public class ControllerRegisterScreen {
     UsuarioService usuarioService = new UsuarioService();
 
     public boolean criarNovaConta() {
-        btnCriarConta.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                errors.clear();
-                clearLabelsErrors();
-                alterColorInputsForDefault();
-                errors = validatorFormRegister.registrationFormValidation(txtNomeEmpresa.getText(), txtNomeUsuario.getText(), txtEmail.getText(), txtSenha.getText(), txtConfirmarSenha.getText());
-                if (errors.isEmpty()) {
-                   usuarioService.createNewUser(new NewUserDTO(txtNomeEmpresa.getText(), txtNomeUsuario.getText(), txtEmail.getText(), txtSenha.getText()));
-                } else {
-                    setErrorMessages(errors);
-                }
+        btnCriarConta.setOnAction(actionEvent -> {
+            errors.clear();
+            clearLabelsErrors();
+            alterColorInputsForDefault();
+            errors = validatorFormRegister.registrationFormValidation(txtNomeEmpresa.getText(), txtNomeUsuario.getText(), txtEmail.getText(), txtSenha.getText(), txtConfirmarSenha.getText());
+            if (errors.isEmpty()) {
+                progress.setVisible(true);
+                new addUsuario().start();
+            } else {
+                setErrorMessages(errors);
             }
         });
         return true;
@@ -103,8 +102,37 @@ public class ControllerRegisterScreen {
         txtConfirmarSenha.setUnFocusColor(Paint.valueOf(colorYellow));
     }
 
+    private void disableJTextFields() {
+        txtNomeEmpresa.setDisable(true);
+        txtNomeUsuario.setDisable(true);
+        txtEmail.setDisable(true);
+        txtSenha.setDisable(true);
+        txtConfirmarSenha.setDisable(true);
+        btnCriarConta.setDisable(true);
+        btnSair.setDisable(true);
+    }
+
     public void sair() {
         Stage stage = (Stage) btnSair.getScene().getWindow();
         stage.close();
+    }
+
+    public class addUsuario extends Thread {
+        @Override
+        public void run() {
+            progress.setVisible(true);
+            disableJTextFields();
+            usuarioService.createNewUser(new NewUserDTO(txtNomeEmpresa.getText(), txtNomeUsuario.getText(), txtEmail.getText(), txtSenha.getText()));
+            progress.setVisible(false);
+            Platform.runLater(() -> {
+                Alert dialog = new Alert(Alert.AlertType.INFORMATION, "OK", ButtonType.OK);
+                dialog.setTitle("Sucesso");
+                dialog.setHeaderText("Conta criada!");
+                dialog.setContentText("Sua conta foi criada com sucesso, seja bem vindo!");
+                dialog.showAndWait()
+                        .filter(resposta -> resposta.equals(ButtonType.OK))
+                        .ifPresent(resposta-> sair());
+            });
+        }
     }
 }

@@ -40,4 +40,5 @@
          <Font name="Ebrima" size="14.0" />
       </font>
    </JFXButton>
+   <ProgressIndicator fx:id="progress" layoutX="175.0" layoutY="245.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" visible="false" />
 </Pane>

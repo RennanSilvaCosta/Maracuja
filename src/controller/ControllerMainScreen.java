@@ -1,6 +1,6 @@
 package controller;
 
-import animatefx.animation.*;
+import animatefx.animation.SlideInLeft;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import javafx.application.Platform;
@@ -10,10 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -27,6 +24,11 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.EnderecoModel;
 import model.UsuarioModel;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import service.EnderecoService;
 import util.MaskField;
 
@@ -34,10 +36,15 @@ import java.io.*;
 import java.net.URL;
 import java.util.*;
 
+import static org.apache.commons.collections4.IteratorUtils.toList;
+
 public class ControllerMainScreen implements Initializable {
 
     private double xOffset = 0;
     private double yOffset = 0;
+
+    @FXML
+    ProgressIndicator progressIndicator;
 
     @FXML
     Hyperlink addCEP = new Hyperlink();
@@ -64,6 +71,8 @@ public class ControllerMainScreen implements Initializable {
 
     EnderecoService enderecoService = new EnderecoService();
 
+    int excelColumnsNumber = 0;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeListViewMainMenu();
@@ -71,14 +80,12 @@ public class ControllerMainScreen implements Initializable {
 
     public void clickItemList() {
         switch (listViewMainMenu.getSelectionModel().getSelectedItem().getText()) {
-            case "Importar CSV":
-                System.out.println("Importar CSV");
-                System.out.println();
-                importCSV();
+            case "Importar Excel":
+                new importCSV().start();
                 break;
 
             case "Gerenciar CEP's":
-                loadNewViewAndCloseOld("/view/GerenciarCEPScreen.fxml",null);
+                loadNewViewAndCloseOld("/view/GerenciarCEPScreen.fxml", null);
                 break;
 
             case "Configurações":
@@ -90,15 +97,15 @@ public class ControllerMainScreen implements Initializable {
     @FXML
     private void searchCEP(KeyEvent ke) {
         if (ke.getCode() == KeyCode.ENTER) {
-            EnderecoModel endereco =  enderecoService.getCepApiMaracuja(txtCEP.getText());
-            if (endereco != null){
+            EnderecoModel endereco = enderecoService.getCepApiMaracuja(txtCEP.getText());
+            if (endereco != null) {
                 txtLougradouro.setText(endereco.getLogradouro());
                 txtBairro.setText(endereco.getBairro());
                 paneResposta.setVisible(true);
                 txtResultado.setText("Com Estrutura");
                 paneResposta.setStyle("-fx-background-color: #86C60F; -fx-background-radius: 0 0 18 0;");
                 new SlideInLeft(paneResposta).play();
-            }else {
+            } else {
                 endereco = enderecoService.getCepViaCep(txtCEP.getText());
                 txtLougradouro.setText(endereco.getLogradouro());
                 txtBairro.setText(endereco.getBairro());
@@ -110,33 +117,10 @@ public class ControllerMainScreen implements Initializable {
         }
     }
 
-    public void importCSV() {
-        FileChooser fl = new FileChooser();
-        fl.setTitle("Selecione um arquivo");
-        fl.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
-        File selecteFile = fl.showOpenDialog(null);
-        List<String> ceps = new ArrayList<>();
-
-        if (selecteFile != null) {
-            String patch = selecteFile.getPath();
-            try (BufferedReader br = new BufferedReader(new FileReader(patch))) {
-                String line = br.readLine();
-                while (line != null) {
-                    ceps.add(line);
-                    line = br.readLine();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            enderecoService.addNewCep(ceps);
-        }
-
-    }
-
     public void initializeListViewMainMenu() {
         try {
             Map<String, String> itemList = new HashMap<>();
-            itemList.put("Importar CSV", "C:\\Users\\renna\\IdeaProjects\\maracuja\\src\\icons\\mainmenu\\icon_import_csv.png");
+            itemList.put("Importar Excel", "C:\\Users\\renna\\IdeaProjects\\maracuja\\src\\icons\\mainmenu\\icon_import_csv.png");
             itemList.put("Gerenciar CEP's", "C:\\Users\\renna\\IdeaProjects\\maracuja\\src\\icons\\mainmenu\\icon_folder.png");
             itemList.put("Configurações", "C:\\Users\\renna\\IdeaProjects\\maracuja\\src\\icons\\mainmenu\\icon_gear.png");
 
@@ -175,21 +159,15 @@ public class ControllerMainScreen implements Initializable {
                 stage2.close();
             }
 
-            scene.setOnMousePressed(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    xOffset = event.getSceneX();
-                    yOffset = event.getSceneY();
-                }
+            scene.setOnMousePressed(event -> {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
             });
 
-            scene.setOnMouseDragged(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    stage.setX(event.getScreenX() - xOffset);
-                    stage.setY(event.getScreenY() - yOffset);
-                    stage.setOpacity(0.7);
-                }
+            scene.setOnMouseDragged(event -> {
+                stage.setX(event.getScreenX() - xOffset);
+                stage.setY(event.getScreenY() - yOffset);
+                stage.setOpacity(0.7);
             });
 
             scene.setOnMouseReleased(new EventHandler<MouseEvent>() {
@@ -200,6 +178,55 @@ public class ControllerMainScreen implements Initializable {
             });
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public class importCSV extends Thread {
+        @Override
+        public void run() {
+            Platform.runLater(() -> {
+                FileChooser fl = new FileChooser();
+                fl.setTitle("Selecione um arquivo");
+                fl.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("xlsx Files", "*.xlsx"));
+                File selecteFile = fl.showOpenDialog(null);
+
+                try {
+                    Workbook workbook = new XSSFWorkbook(selecteFile);
+                    Sheet abaPlanilha = workbook.getSheetAt(0);
+
+                    List<Row> linhas = (List<Row>) toList(abaPlanilha.iterator());
+
+                    linhas.forEach(linha -> {
+                        List<?> celulas = toList(linha.cellIterator());
+                        excelColumnsNumber = celulas.size();
+                    });
+
+                    List<String> choices = new ArrayList<>();
+                    for (int i = 1; i <= excelColumnsNumber; i++) {
+                        choices.add(String.valueOf(i));
+                    }
+
+                    ChoiceDialog<String> dialog = new ChoiceDialog<>("1", choices);
+                    dialog.setTitle("Selecione a coluna");
+                    dialog.setHeaderText("Em qual coluna se localiza os CEP's?");
+                    dialog.setContentText("Escolha a coluna:");
+                    Optional<String> result = dialog.showAndWait();
+
+                    if (result.isPresent()) {
+                        progressIndicator.setVisible(true);
+                        linhas.forEach(linha -> {
+                            List<?> celulas = toList(linha.cellIterator());
+                            System.out.println(celulas.get(Integer.parseInt(result.get()) - 1));
+                        });
+                    } else {
+                        progressIndicator.setVisible(false);
+                    }
+
+                } catch (IOException | InvalidFormatException e) {
+                    e.printStackTrace();
+                }
+                progressIndicator.setVisible(false);
+            });
         }
     }
 
