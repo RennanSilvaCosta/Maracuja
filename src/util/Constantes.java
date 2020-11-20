@@ -3,8 +3,10 @@ package util;
 public class Constantes {
 
     //SOURCE API
-    public static final String URL_BASE_PROD = "https://api-maracuja.herokuapp.com";
+    public static final String URL_BASE_PROD = "http://localhost:8080";
     //public static final String URL_BASE_LOCAL = "http://localhost:8080";
+    //http://localhost:8080
+    //https://api-maracuja.herokuapp.com
     public static final String URL_VIA_CEP = "https://viacep.com.br/ws/";
 
     //METODOS
@@ -63,6 +65,8 @@ public class Constantes {
 
     //RESPONSE CODES
     public final static Integer STATUS_CODE_SUCCESSFUL = 200;
+    public final static Integer STATUS_CODE_NOCONTENT = 204;
+    public final static Integer STATUS_CODE_BAD_REQUEST = 400;
     public final static Integer STATUS_CODE_FORBIDDEN = 403;
     public final static Integer STATUS_CODE_UNAUTHORIZED = 401;
     public final static Integer STATUS_CODE_INTERNAL_SERVER_ERROR = 500;

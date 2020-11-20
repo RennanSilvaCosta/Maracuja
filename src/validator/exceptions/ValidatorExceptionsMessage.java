@@ -17,11 +17,17 @@ public class ValidatorExceptionsMessage {
     public static final String SENHA_NULL = "A senha é obrigatória.";
     public static final String SENHA_MIN_CARC_NAO_ATINGIDO = "A senha deve conter no minimo " + MIN_CARACTER_PASSWORD + " caracteres.";
     public static final String SENHAS_NAO_COINCIDEM = "A senhas não coincidem.";
+    public static final String SERVER_ERROR = "Algo deu errado, tente novamente mais tarde";
 
-    //FORMULARIO DE REGISTRO ALERT DIALOG
-    public static final String FORM_REGISTER_TITLE_ALERT = "Sucesso!";
-    public static final String FORM_REGISTER_HEADER_ALERT = "Conta criada!";
-    public static final String FORM_REGISTER_CONTENTTEXT_ALERT = "Sua conta foi criada com sucesso, seja bem vindo!";
+    //FORMULARIO DE REGISTRO ALERT DIALOG SUCCESS
+    public static final String FORM_REGISTER_TITLE_ALERT_SUCCESS = "Sucesso!";
+    public static final String FORM_REGISTER_HEADER_ALERT_SUCCESS = "Conta criada!";
+    public static final String FORM_REGISTER_CONTENTTEXT_ALERT_SUCCESS = "Sua conta foi criada com sucesso, seja bem vindo!";
+
+    //FORMULARIO DE REGISTRO ALERT DIALOG FAIL
+    public static final String FORM_REGISTER_TITLE_ALERT_FAIL = "Erro";
+    public static final String FORM_REGISTER_HEADER_ALERT_FAIL = "Email Inválido!";
+    public static final String EMAIL_JA_CADASTRADO = "O email informado já está cadastrado!";
 
     //FORMULARIO DE LOGIN
     public static final String FORM_LOGIN_TITLE_ALERT = "Erro";

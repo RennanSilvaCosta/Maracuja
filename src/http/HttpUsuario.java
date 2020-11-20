@@ -2,13 +2,13 @@ package http;
 
 import http.response.HttpResponse;
 import util.Constantes;
+import validator.exceptions.ValidatorExceptionsMessage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.SocketException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Map;
@@ -63,8 +63,8 @@ public class HttpUsuario {
         return response.toString();
     }
 
-    public String sendPOST(String url, String json, String method) throws IOException {
-
+    public Map<Integer, String> createNewUser(String url, String json, String method) throws IOException {
+        HttpResponse response = new HttpResponse();
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
@@ -86,15 +86,14 @@ public class HttpUsuario {
         System.out.println("Submit JSON: " + json);
         System.out.println("Response Code : " + responseCode);
 
-        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
+        if (responseCode == Constantes.STATUS_CODE_SUCCESSFUL || responseCode == Constantes.STATUS_CODE_NOCONTENT) {
+            response.addResponse(responseCode, ValidatorExceptionsMessage.FORM_REGISTER_CONTENTTEXT_ALERT_SUCCESS);
+        } else if (responseCode == Constantes.STATUS_CODE_BAD_REQUEST) {
+            response.addResponse(responseCode, ValidatorExceptionsMessage.EMAIL_JA_CADASTRADO);
+        } else {
+            response.addResponse(responseCode, ValidatorExceptionsMessage.SERVER_ERROR);
         }
-        in.close();
-        return response.toString();
+        return response.getResponse();
     }
 
     public Map<Integer, String> autenticated(String url, String json, String method) throws IOException {
@@ -119,16 +118,14 @@ public class HttpUsuario {
         System.out.println("Submit JSON: " + json);
         System.out.println("Response Code : " + responseCode);
 
-        if (responseCode == 200) {
+        if (responseCode == Constantes.STATUS_CODE_SUCCESSFUL) {
             response.addResponse(responseCode, con.getHeaderField("Authorization"));
-            return response.getResponse();
-        } else if (responseCode == 401) {
+        } else if (responseCode == Constantes.STATUS_CODE_UNAUTHORIZED) {
             response.addResponse(responseCode, "Email ou senha inválidos");
-            return response.getResponse();
         } else {
             response.addResponse(responseCode, "Algo deu errado, tente novamente mais tarde");
-            return response.getResponse();
         }
+        return response.getResponse();
     }
 
     public String refreshToken(String url, String method) throws IOException {

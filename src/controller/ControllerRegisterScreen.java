@@ -41,12 +41,12 @@ public class ControllerRegisterScreen {
     @FXML
     Label labelNomeEmpresaError, labelNomeUsuarioError, labelEmailError, labelSenhaError, labelConfirmarSenhaError;
 
+    Map<Integer, String> responseHttp = new HashMap<>();
     Map<String, String> errors = new HashMap<>();
-
     ValidatorFormRegister validatorFormRegister = new ValidatorFormRegister();
     UsuarioService usuarioService = new UsuarioService();
 
-    public boolean criarNovaConta() {
+    public boolean createNewAccount() {
         btnCriarConta.setOnAction(actionEvent -> {
             errors.clear();
             clearLabelsErrors();
@@ -90,28 +90,46 @@ public class ControllerRegisterScreen {
         }
     }
 
-    public void sair() {
-        Stage stage = (Stage) btnSair.getScene().getWindow();
-        stage.close();
+    private void setMessageHettpResponse(Map<Integer, String> response) {
+        Set<Integer> fields = response.keySet();
+        if (fields.contains(Constantes.STATUS_CODE_SUCCESSFUL) || fields.contains(Constantes.STATUS_CODE_NOCONTENT)) {
+            Platform.runLater(() -> {
+                Alert dialog = new Alert(Alert.AlertType.INFORMATION, "OK", ButtonType.OK);
+                dialog.initStyle(StageStyle.UTILITY);
+                dialog.setTitle(ValidatorExceptionsMessage.FORM_REGISTER_TITLE_ALERT_SUCCESS);
+                dialog.setHeaderText(ValidatorExceptionsMessage.FORM_REGISTER_HEADER_ALERT_SUCCESS);
+                dialog.setContentText(ValidatorExceptionsMessage.FORM_REGISTER_CONTENTTEXT_ALERT_SUCCESS);
+                dialog.showAndWait()
+                        .filter(resposta -> resposta.equals(ButtonType.OK))
+                        .ifPresent(resposta-> sair());
+            });
+        } else if (fields.contains(Constantes.STATUS_CODE_BAD_REQUEST)) {
+            Platform.runLater(() -> {
+                enableJTextFields();
+                txtEmail.setUnFocusColor(Paint.valueOf(Constantes.COLOR_RED));
+                labelEmailError.setText(ValidatorExceptionsMessage.EMAIL_INVALIDO);
+                Alert dialog = new Alert(Alert.AlertType.ERROR, "OK", ButtonType.OK);
+                dialog.initStyle(StageStyle.UTILITY);
+                dialog.setTitle(ValidatorExceptionsMessage.FORM_REGISTER_TITLE_ALERT_FAIL);
+                dialog.setHeaderText(ValidatorExceptionsMessage.FORM_REGISTER_HEADER_ALERT_FAIL);
+                dialog.setContentText(ValidatorExceptionsMessage.EMAIL_JA_CADASTRADO);
+                dialog.showAndWait();
+            });
+        }
+
     }
 
     public class addUsuario extends Thread {
         @Override
         public void run() {
+            responseHttp.clear();
+            clearLabelsErrors();
+            alterColorInputsForDefault();
             progress.setVisible(true);
             disableJTextFields();
-            usuarioService.createNewUser(new NewUserDTO(txtNomeEmpresa.getText(), txtNomeUsuario.getText(), txtEmail.getText(), txtSenha.getText()));
+            responseHttp = usuarioService.createNewUser(new NewUserDTO(txtNomeEmpresa.getText(), txtNomeUsuario.getText(), txtEmail.getText(), txtSenha.getText()));
             progress.setVisible(false);
-            Platform.runLater(() -> {
-                Alert dialog = new Alert(Alert.AlertType.INFORMATION, "OK", ButtonType.OK);
-                dialog.initStyle(StageStyle.UTILITY);
-                dialog.setTitle(ValidatorExceptionsMessage.FORM_REGISTER_TITLE_ALERT);
-                dialog.setHeaderText(ValidatorExceptionsMessage.FORM_REGISTER_HEADER_ALERT);
-                dialog.setContentText(ValidatorExceptionsMessage.FORM_REGISTER_CONTENTTEXT_ALERT);
-                dialog.showAndWait()
-                        .filter(resposta -> resposta.equals(ButtonType.OK))
-                        .ifPresent(resposta-> sair());
-            });
+            setMessageHettpResponse(responseHttp);
         }
     }
 
@@ -155,5 +173,20 @@ public class ControllerRegisterScreen {
         txtConfirmarSenha.setDisable(true);
         btnCriarConta.setDisable(true);
         btnSair.setDisable(true);
+    }
+
+    private void enableJTextFields() {
+        txtNomeEmpresa.setDisable(false);
+        txtNomeUsuario.setDisable(false);
+        txtEmail.setDisable(false);
+        txtSenha.setDisable(false);
+        txtConfirmarSenha.setDisable(false);
+        btnCriarConta.setDisable(false);
+        btnSair.setDisable(false);
+    }
+
+    public void sair() {
+        Stage stage = (Stage) btnSair.getScene().getWindow();
+        stage.close();
     }
 }
