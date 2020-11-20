@@ -18,4 +18,13 @@ public class ValidatorExceptionsMessage {
     public static final String SENHA_MIN_CARC_NAO_ATINGIDO = "A senha deve conter no minimo " + MIN_CARACTER_PASSWORD + " caracteres.";
     public static final String SENHAS_NAO_COINCIDEM = "A senhas não coincidem.";
 
+    //FORMULARIO DE REGISTRO ALERT DIALOG
+    public static final String FORM_REGISTER_TITLE_ALERT = "Sucesso!";
+    public static final String FORM_REGISTER_HEADER_ALERT = "Conta criada!";
+    public static final String FORM_REGISTER_CONTENTTEXT_ALERT = "Sua conta foi criada com sucesso, seja bem vindo!";
+
+    //FORMULARIO DE LOGIN
+    public static final String FORM_LOGIN_TITLE_ALERT = "Erro";
+    public static final String FORM_LOGIN_HEADER_ALERT = "Error ao o fazer login";
+
 }

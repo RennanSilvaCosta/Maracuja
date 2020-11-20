@@ -30,6 +30,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import service.EnderecoService;
+import util.Constantes;
 import util.MaskField;
 
 import java.io.*;
@@ -59,7 +60,7 @@ public class ControllerMainScreen implements Initializable {
     Pane paneColor, paneResposta, paneAddNewCep;
 
     @FXML
-    Button btnSair;
+    JFXButton btnSair;
 
     @FXML
     Label txtResultado, txtNomeUsuario, txtEmailUsuario, txtNomeEmpresa;
@@ -80,15 +81,15 @@ public class ControllerMainScreen implements Initializable {
 
     public void clickItemList() {
         switch (listViewMainMenu.getSelectionModel().getSelectedItem().getText()) {
-            case "Importar Excel":
+            case Constantes.MAIN_MENU_ITEM_IMPORTAR_EXCEL:
                 new importCSV().start();
                 break;
 
-            case "Gerenciar CEP's":
+            case Constantes.MAIN_MENU_ITEM_GERENCIAR_CEP:
                 loadNewViewAndCloseOld("/view/GerenciarCEPScreen.fxml", null);
                 break;
 
-            case "Configurações":
+            case Constantes.MAIN_MENU_ITEM_CONFIGURACOES:
                 System.out.println("Configurações");
                 break;
         }
@@ -102,7 +103,8 @@ public class ControllerMainScreen implements Initializable {
                 txtLougradouro.setText(endereco.getLogradouro());
                 txtBairro.setText(endereco.getBairro());
                 paneResposta.setVisible(true);
-                txtResultado.setText("Com Estrutura");
+
+                txtResultado.setText(Constantes.SUCCESSFUL_RESULT);
                 paneResposta.setStyle("-fx-background-color: #86C60F; -fx-background-radius: 0 0 18 0;");
                 new SlideInLeft(paneResposta).play();
             } else {
@@ -110,7 +112,7 @@ public class ControllerMainScreen implements Initializable {
                 txtLougradouro.setText(endereco.getLogradouro());
                 txtBairro.setText(endereco.getBairro());
                 paneResposta.setVisible(true);
-                txtResultado.setText("Sem estrutura");
+                txtResultado.setText(Constantes.NOT_FOUND);
                 paneResposta.setStyle("-fx-background-color: #FD1810; -fx-background-radius: 0 0 18 0;");
                 new SlideInLeft(paneResposta).play();
             }
@@ -120,9 +122,9 @@ public class ControllerMainScreen implements Initializable {
     public void initializeListViewMainMenu() {
         try {
             Map<String, String> itemList = new HashMap<>();
-            itemList.put("Importar Excel", "C:\\Users\\renna\\IdeaProjects\\maracuja\\src\\icons\\mainmenu\\icon_import_csv.png");
-            itemList.put("Gerenciar CEP's", "C:\\Users\\renna\\IdeaProjects\\maracuja\\src\\icons\\mainmenu\\icon_folder.png");
-            itemList.put("Configurações", "C:\\Users\\renna\\IdeaProjects\\maracuja\\src\\icons\\mainmenu\\icon_gear.png");
+            itemList.put(Constantes.MAIN_MENU_ITEM_IMPORTAR_EXCEL, "C:\\Users\\renna\\IdeaProjects\\maracuja\\src\\icons\\mainmenu\\icon_import_csv.png");
+            itemList.put(Constantes.MAIN_MENU_ITEM_GERENCIAR_CEP, "C:\\Users\\renna\\IdeaProjects\\maracuja\\src\\icons\\mainmenu\\icon_folder.png");
+            itemList.put(Constantes.MAIN_MENU_ITEM_CONFIGURACOES, "C:\\Users\\renna\\IdeaProjects\\maracuja\\src\\icons\\mainmenu\\icon_gear.png");
 
             for (String labelsItemList : itemList.keySet()) {
                 itemListView = new Label(labelsItemList);
@@ -148,6 +150,7 @@ public class ControllerMainScreen implements Initializable {
             Stage stage = new Stage();
             Scene scene = new Scene(parent);
             scene.setFill(Color.TRANSPARENT);
+            stage.getIcons().add(new Image("icons\\icon_maracuja_64px.png"));
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
@@ -231,7 +234,7 @@ public class ControllerMainScreen implements Initializable {
     }
 
     @FXML
-    private void encerrarAplicacao() {
-        Platform.exit();
+    private void logout() {
+        loadNewViewAndCloseOld("/view/LoginScreen.fxml", btnSair);
     }
 }

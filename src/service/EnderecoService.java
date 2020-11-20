@@ -17,6 +17,9 @@ public class EnderecoService {
 
     HttpEndereco httpEndereco = new HttpEndereco();
     Gson gson = new Gson();
+    UsuarioModel usuarioModel = new UsuarioModel();
+    UsuarioDAO dao = new UsuarioDAO();
+    UsuarioService usuarioService = new UsuarioService();
 
     private Type listEnderecoType = new TypeToken<List<EnderecoModel>>() {
     }.getType();
@@ -31,11 +34,9 @@ public class EnderecoService {
     }
 
     public EnderecoModel getCepApiMaracuja(String cep) {
-        UsuarioService usuarioService = new UsuarioService();
-        UsuarioDAO dao = new UsuarioDAO();
         try {
-            UsuarioModel usuarioModel = usuarioService.getUserLogged(dao.getToken());
-            return gson.fromJson(httpEndereco.sendGET(Constantes.URL_BASE_LOCAL + "/enderecos/" + cep + "/" + usuarioModel.getEmpresa().getId(), Constantes.getGET()), EnderecoModel.class);
+            usuarioModel = usuarioService.getUserLogged(dao.getToken());
+            return gson.fromJson(httpEndereco.sendGET(Constantes.URL_BASE_PROD + "/enderecos/" + cep + "/" + usuarioModel.getEmpresa().getId(), Constantes.getGET()), EnderecoModel.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -44,16 +45,13 @@ public class EnderecoService {
 
     public String addNewCep(List<String> ceps) {
         NewEnderecoDTO enderecoDTO;
-        UsuarioDAO dao = new UsuarioDAO();
-        UsuarioModel user;
-        UsuarioService usuarioService = new UsuarioService();
         String token = dao.getToken();
-        user = usuarioService.getUserLogged(token);
+        usuarioModel = usuarioService.getUserLogged(token);
         for (String cep : ceps) {
             try {
                 enderecoDTO = gson.fromJson(httpEndereco.sendGET(Constantes.URL_VIA_CEP + cep + "/json", Constantes.getGET()), NewEnderecoDTO.class);
-                enderecoDTO.setEmpresa(user.getEmpresa());
-                httpEndereco.sendPOST(Constantes.URL_BASE_LOCAL + "/enderecos", gson.toJson(enderecoDTO, NewEnderecoDTO.class), Constantes.getPOST(), token);
+                enderecoDTO.setEmpresa(usuarioModel.getEmpresa());
+                httpEndereco.sendPOST(Constantes.URL_BASE_PROD + "/enderecos", gson.toJson(enderecoDTO, NewEnderecoDTO.class), Constantes.getPOST(), token);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -62,13 +60,10 @@ public class EnderecoService {
     }
 
     public List<EnderecoModel> getAll() {
-        UsuarioModel user;
-        UsuarioService userServicer = new UsuarioService();
-        UsuarioDAO dao = new UsuarioDAO();
         String token = dao.getToken();
-        user = userServicer.getUserLogged(token);
+        usuarioModel = usuarioService.getUserLogged(token);
         try {
-            return new Gson().fromJson(httpEndereco.sendGET(Constantes.URL_BASE_LOCAL + "/enderecos/" + user.getEmpresa().getId(), Constantes.getGET()), listEnderecoType);
+            return new Gson().fromJson(httpEndereco.sendGET(Constantes.URL_BASE_PROD + "/enderecos/" + usuarioModel.getEmpresa().getId(), Constantes.getGET()), listEnderecoType);
         } catch (IOException e) {
             e.printStackTrace();
         }

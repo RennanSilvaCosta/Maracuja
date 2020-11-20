@@ -1,3 +1,0 @@
- #FFFD38 amarelho
- #9FE62F verde 
- #F01810 vermelho

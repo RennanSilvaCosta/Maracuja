@@ -58,5 +58,4 @@ public class ValidatorFormRegister {
             exception.addError("confirmarSenha", ValidatorExceptionsMessage.SENHAS_NAO_COINCIDEM);
         }
     }
-
 }

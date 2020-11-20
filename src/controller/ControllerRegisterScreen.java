@@ -10,10 +10,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import service.UsuarioService;
+import util.Constantes;
 import validator.ValidatorFormRegister;
+import validator.exceptions.ValidatorExceptionsMessage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -58,58 +63,31 @@ public class ControllerRegisterScreen {
     }
 
     private void setErrorMessages(Map<String, String> errors) {
-        String colorRed = "#ff0000";
+
         Set<String> fields = errors.keySet();
         clearLabelsErrors();
         alterColorInputsForDefault();
 
         if (fields.contains("nomeEmpresa")) {
-            txtNomeEmpresa.setUnFocusColor(Paint.valueOf(colorRed));
+            txtNomeEmpresa.setUnFocusColor(Paint.valueOf(Constantes.COLOR_RED));
             labelNomeEmpresaError.setText(errors.get("nomeEmpresa"));
         }
         if (fields.contains("nomeUsuario")) {
-            txtNomeUsuario.setUnFocusColor(Paint.valueOf(colorRed));
+            txtNomeUsuario.setUnFocusColor(Paint.valueOf(Constantes.COLOR_RED));
             labelNomeUsuarioError.setText(errors.get("nomeUsuario"));
         }
         if (fields.contains("email")) {
-            txtEmail.setUnFocusColor(Paint.valueOf(colorRed));
+            txtEmail.setUnFocusColor(Paint.valueOf(Constantes.COLOR_RED));
             labelEmailError.setText(errors.get("email"));
         }
         if (fields.contains("senha")) {
-            txtSenha.setUnFocusColor(Paint.valueOf(colorRed));
+            txtSenha.setUnFocusColor(Paint.valueOf(Constantes.COLOR_RED));
             labelSenhaError.setText(errors.get("senha"));
         }
         if (fields.contains("confirmarSenha")) {
-            txtConfirmarSenha.setUnFocusColor(Paint.valueOf(colorRed));
+            txtConfirmarSenha.setUnFocusColor(Paint.valueOf(Constantes.COLOR_RED));
             labelConfirmarSenhaError.setText(errors.get("confirmarSenha"));
         }
-    }
-
-    private void clearLabelsErrors() {
-        labelNomeEmpresaError.setText("");
-        labelNomeUsuarioError.setText("");
-        labelEmailError.setText("");
-        labelSenhaError.setText("");
-        labelConfirmarSenhaError.setText("");
-    }
-
-    private void alterColorInputsForDefault() {
-        String colorYellow = "#ffca28";
-        txtNomeEmpresa.setUnFocusColor(Paint.valueOf(colorYellow));
-        txtNomeUsuario.setUnFocusColor(Paint.valueOf(colorYellow));
-        txtEmail.setUnFocusColor(Paint.valueOf(colorYellow));
-        txtSenha.setUnFocusColor(Paint.valueOf(colorYellow));
-        txtConfirmarSenha.setUnFocusColor(Paint.valueOf(colorYellow));
-    }
-
-    private void disableJTextFields() {
-        txtNomeEmpresa.setDisable(true);
-        txtNomeUsuario.setDisable(true);
-        txtEmail.setDisable(true);
-        txtSenha.setDisable(true);
-        txtConfirmarSenha.setDisable(true);
-        btnCriarConta.setDisable(true);
-        btnSair.setDisable(true);
     }
 
     public void sair() {
@@ -126,13 +104,56 @@ public class ControllerRegisterScreen {
             progress.setVisible(false);
             Platform.runLater(() -> {
                 Alert dialog = new Alert(Alert.AlertType.INFORMATION, "OK", ButtonType.OK);
-                dialog.setTitle("Sucesso");
-                dialog.setHeaderText("Conta criada!");
-                dialog.setContentText("Sua conta foi criada com sucesso, seja bem vindo!");
+                dialog.initStyle(StageStyle.UTILITY);
+                dialog.setTitle(ValidatorExceptionsMessage.FORM_REGISTER_TITLE_ALERT);
+                dialog.setHeaderText(ValidatorExceptionsMessage.FORM_REGISTER_HEADER_ALERT);
+                dialog.setContentText(ValidatorExceptionsMessage.FORM_REGISTER_CONTENTTEXT_ALERT);
                 dialog.showAndWait()
                         .filter(resposta -> resposta.equals(ButtonType.OK))
                         .ifPresent(resposta-> sair());
             });
         }
+    }
+
+    @FXML
+    private void keyPressed(KeyEvent evt) {
+        if (evt.getCode() == KeyCode.ENTER) {
+            errors.clear();
+            clearLabelsErrors();
+            alterColorInputsForDefault();
+            errors = validatorFormRegister.registrationFormValidation(txtNomeEmpresa.getText(), txtNomeUsuario.getText(), txtEmail.getText(), txtSenha.getText(), txtConfirmarSenha.getText());
+            if (errors.isEmpty()) {
+                progress.setVisible(true);
+                new addUsuario().start();
+            } else {
+                setErrorMessages(errors);
+            }
+        }
+    }
+
+    private void clearLabelsErrors() {
+        labelNomeEmpresaError.setText("");
+        labelNomeUsuarioError.setText("");
+        labelEmailError.setText("");
+        labelSenhaError.setText("");
+        labelConfirmarSenhaError.setText("");
+    }
+
+    private void alterColorInputsForDefault() {
+        txtNomeEmpresa.setUnFocusColor(Paint.valueOf(Constantes.COLOR_YELLOW));
+        txtNomeUsuario.setUnFocusColor(Paint.valueOf(Constantes.COLOR_YELLOW));
+        txtEmail.setUnFocusColor(Paint.valueOf(Constantes.COLOR_YELLOW));
+        txtSenha.setUnFocusColor(Paint.valueOf(Constantes.COLOR_YELLOW));
+        txtConfirmarSenha.setUnFocusColor(Paint.valueOf(Constantes.COLOR_YELLOW));
+    }
+
+    private void disableJTextFields() {
+        txtNomeEmpresa.setDisable(true);
+        txtNomeUsuario.setDisable(true);
+        txtEmail.setDisable(true);
+        txtSenha.setDisable(true);
+        txtConfirmarSenha.setDisable(true);
+        btnCriarConta.setDisable(true);
+        btnSair.setDisable(true);
     }
 }

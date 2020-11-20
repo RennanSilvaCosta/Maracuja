@@ -3,8 +3,8 @@ package util;
 public class Constantes {
 
     //SOURCE API
-    public static final String URL_BASE_DEV = "https://maracuja-api.herokuapp.com";
-    public static final String URL_BASE_LOCAL = "http://localhost:8080";
+    public static final String URL_BASE_PROD = "https://api-maracuja.herokuapp.com";
+    //public static final String URL_BASE_LOCAL = "http://localhost:8080";
     public static final String URL_VIA_CEP = "https://viacep.com.br/ws/";
 
     //METODOS
@@ -47,5 +47,25 @@ public class Constantes {
     public final static String URL_LOCAL_DB = "jdbc:mysql://localhost:3306/maracuja";
     public final static String USER_NAME_DB = "root";
     public final static String PASSWORD_DB = "";
+
+    //ITENS MAIN MENU
+    public final static String MAIN_MENU_ITEM_IMPORTAR_EXCEL = "Importar Excel";
+    public final static String MAIN_MENU_ITEM_GERENCIAR_CEP = "Gerenciar CEP's";
+    public final static String MAIN_MENU_ITEM_CONFIGURACOES = "Configurações";
+
+    //PAINEL DE RESULTADO DE PESQUISA PELO CEP
+    public final static String SUCCESSFUL_RESULT = "Com estrutura";
+    public final static String NOT_FOUND = "Sem estrutura";
+
+    //CORES HEXADECIMAL
+    public final static String COLOR_RED = "#ff0000";
+    public final static String COLOR_YELLOW = "#ffca28";
+
+    //RESPONSE CODES
+    public final static Integer STATUS_CODE_SUCCESSFUL = 200;
+    public final static Integer STATUS_CODE_FORBIDDEN = 403;
+    public final static Integer STATUS_CODE_UNAUTHORIZED = 401;
+    public final static Integer STATUS_CODE_INTERNAL_SERVER_ERROR = 500;
+    public final static Integer STATUS_CODE_SERVICE_UNAVAILABLE = 503;
 
 }

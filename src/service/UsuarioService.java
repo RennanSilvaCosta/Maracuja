@@ -17,15 +17,11 @@ import java.util.Map;
 public class UsuarioService {
 
     private final HttpUsuario httpUsuario = new HttpUsuario();
-
-    private Type empresaType = new TypeToken<List<EmpresaModel>>() {
-    }.getType();
-
     private Gson gson = new Gson();
 
     public Map<Integer, String> logIn(CredenciaisDTO cred) {
         try {
-            return httpUsuario.autenticated(Constantes.URL_BASE_LOCAL + "/login", gson.toJson(cred, CredenciaisDTO.class), Constantes.getPOST());
+            return httpUsuario.autenticated(Constantes.URL_BASE_PROD + "/login", gson.toJson(cred, CredenciaisDTO.class), Constantes.getPOST());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -34,7 +30,7 @@ public class UsuarioService {
 
     public boolean createNewUser(NewUserDTO user) {
         try {
-            httpUsuario.sendPOST(Constantes.URL_BASE_LOCAL + "/usuarios", gson.toJson(user, NewUserDTO.class), Constantes.getPOST());
+            httpUsuario.sendPOST(Constantes.URL_BASE_PROD + "/usuarios", gson.toJson(user, NewUserDTO.class), Constantes.getPOST());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -43,7 +39,7 @@ public class UsuarioService {
 
     public UsuarioModel getUserLogged(String token) {
         try {
-            return gson.fromJson(httpUsuario.sendGET(Constantes.URL_BASE_LOCAL + "/auth/user_auth", Constantes.getGET(), token), UsuarioModel.class);
+            return gson.fromJson(httpUsuario.sendGET(Constantes.URL_BASE_PROD + "/auth/user_auth", Constantes.getGET(), token), UsuarioModel.class);
         } catch (IOException e) {
             e.printStackTrace();
         }

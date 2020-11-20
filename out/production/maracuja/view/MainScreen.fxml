@@ -50,7 +50,7 @@
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
-        <JFXButton fx:id="btnSair" layoutX="685.0" mnemonicParsing="false" onAction="#encerrarAplicacao" prefHeight="35.0" prefWidth="35.0" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="x" textAlignment="CENTER">
+        <JFXButton fx:id="btnSair" layoutX="685.0" mnemonicParsing="false" onAction="#logout" prefHeight="35.0" prefWidth="35.0" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="x" textAlignment="CENTER">
             <font>
                 <Font name="Ebrima Bold" size="12.0" />
             </font>

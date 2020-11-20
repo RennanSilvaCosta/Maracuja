@@ -12,6 +12,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
@@ -20,7 +22,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.UsuarioModel;
 import service.UsuarioService;
+import util.Constantes;
 import validator.ValidatorFormLogin;
+import validator.exceptions.ValidatorExceptionsMessage;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -36,6 +40,9 @@ public class ControllerLoginScreen {
     JFXTextField txtEmail;
 
     @FXML
+    ProgressIndicator progressIndicator;
+
+    @FXML
     JFXPasswordField txtSenha;
 
     @FXML
@@ -49,30 +56,47 @@ public class ControllerLoginScreen {
     Map<Integer, String> response = new HashMap<>();
     Map<String, String> erros = new HashMap<>();
 
+    CredenciaisDTO cred = new CredenciaisDTO();
+    UsuarioService usuarioService = new UsuarioService();
+    UsuarioModel user;
+
     @FXML
     private void login() {
-        CredenciaisDTO cred = new CredenciaisDTO();
-        UsuarioService usuarioService = new UsuarioService();
-        UsuarioModel user;
-
         erros.clear();
         erros = validatorFormLogin.loginFormValidation(txtEmail.getText(), txtSenha.getText());
         if (erros.isEmpty()) {
+            progressIndicator.setVisible(true);
+            new Login().start();
+        } else {
+            setErroFormLoginValidator(erros);
+        }
+    }
+
+    //TODO: Verificar progress bar
+    public class Login extends Thread {
+        @Override
+        public void run() {
+            progressIndicator.setVisible(true);
+            disableButtonAndTextField();
             cred.setEmail(txtEmail.getText());
             cred.setSenha(txtSenha.getText());
             response.clear();
             response = usuarioService.logIn(cred);
-            if (response.containsKey(200)) {
+            progressIndicator.setVisible(false);
+            if (response.containsKey(Constantes.STATUS_CODE_SUCCESSFUL)) {
                 //popular objeto usuario e enviar para a tela principal
-                dao.saveToken(response.get(200));
-                user = usuarioService.getUserLogged(response.get(200));
-                loadNewViewAndCloseOld("/view/MainScreen.fxml", btnlogin, user);
+                Platform.runLater(() -> {
+                    dao.saveToken(response.get(Constantes.STATUS_CODE_SUCCESSFUL));
+                    user = usuarioService.getUserLogged(response.get(Constantes.STATUS_CODE_SUCCESSFUL));
+                    loadNewViewAndCloseOld("/view/MainScreen.fxml", btnlogin, user);
+                });
             } else {
-                //exibir error para o usuario
-                setResponseHttp(response);
+                Platform.runLater(() -> {
+                    //exibir error para o usuario
+                    setResponseHttp(response);
+                });
             }
-        } else {
-            setErroFormLoginValidator(erros);
+
         }
     }
 
@@ -87,6 +111,7 @@ public class ControllerLoginScreen {
             tela.initializeInfoUser(user);
 
             scene.setFill(Color.TRANSPARENT);
+            stage.getIcons().add(new Image("icons\\icon_maracuja_64px.png"));
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
@@ -127,6 +152,7 @@ public class ControllerLoginScreen {
             Stage stage = new Stage();
             Scene scene = new Scene(parent);
             scene.setFill(Color.TRANSPARENT);
+            stage.getIcons().add(new Image("icons\\icon_maracuja_64px.png"));
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
@@ -158,14 +184,18 @@ public class ControllerLoginScreen {
     private void setResponseHttp(Map<Integer, String> responseHttp) {
         Set<Integer> codeResponse = responseHttp.keySet();
         Alert alerta = new Alert(Alert.AlertType.ERROR);
-        alerta.setTitle("Error");
-        alerta.setHeaderText("Error ao o fazer login");
 
-        if (codeResponse.contains(401)) {
-            alerta.setContentText(responseHttp.get(401));
+        alerta.setTitle(ValidatorExceptionsMessage.FORM_LOGIN_TITLE_ALERT);
+        alerta.setHeaderText(ValidatorExceptionsMessage.FORM_LOGIN_HEADER_ALERT);
+
+        if (codeResponse.contains(Constantes.STATUS_CODE_UNAUTHORIZED)) {
+            alerta.setContentText(responseHttp.get(Constantes.STATUS_CODE_UNAUTHORIZED));
             alerta.showAndWait();
-        } else if (codeResponse.contains(500)) {
-            alerta.setContentText(responseHttp.get(500));
+        } else if (codeResponse.contains(Constantes.STATUS_CODE_INTERNAL_SERVER_ERROR)) {
+            alerta.setContentText(responseHttp.get(Constantes.STATUS_CODE_INTERNAL_SERVER_ERROR));
+            alerta.showAndWait();
+        } else if (codeResponse.contains(Constantes.STATUS_CODE_SERVICE_UNAVAILABLE)) {
+            alerta.setContentText(responseHttp.get(Constantes.STATUS_CODE_SERVICE_UNAVAILABLE));
             alerta.showAndWait();
         }
     }
@@ -184,6 +214,12 @@ public class ControllerLoginScreen {
     private void clearLabelsErros() {
         labelEmailError.setText("");
         labelSenhaError.setText("");
+    }
+
+    private void disableButtonAndTextField () {
+        txtEmail.setDisable(true);
+        txtSenha.setDisable(true);
+        btnlogin.setDisable(true);
     }
 
     @FXML
