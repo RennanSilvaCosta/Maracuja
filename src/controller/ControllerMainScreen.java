@@ -3,6 +3,7 @@ package controller;
 import animatefx.animation.SlideInLeft;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
+import dto.NewEnderecoDTO;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -73,6 +74,7 @@ public class ControllerMainScreen implements Initializable {
     EnderecoService enderecoService = new EnderecoService();
 
     int excelColumnsNumber = 0;
+    List<String> cepInvalido = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -187,51 +189,84 @@ public class ControllerMainScreen implements Initializable {
     public class importCSV extends Thread {
         @Override
         public void run() {
+            progressIndicator.setVisible(true);
             Platform.runLater(() -> {
                 FileChooser fl = new FileChooser();
                 fl.setTitle("Selecione um arquivo");
                 fl.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("xlsx Files", "*.xlsx"));
                 File selecteFile = fl.showOpenDialog(null);
+                if (selecteFile != null) {
+                    try {
+                        Workbook workbook = new XSSFWorkbook(selecteFile);
+                        Sheet abaPlanilha = workbook.getSheetAt(0);
+                        List<Row> linhas = (List<Row>) toList(abaPlanilha.iterator());
 
-                try {
-                    Workbook workbook = new XSSFWorkbook(selecteFile);
-                    Sheet abaPlanilha = workbook.getSheetAt(0);
-
-                    List<Row> linhas = (List<Row>) toList(abaPlanilha.iterator());
-
-                    linhas.forEach(linha -> {
-                        List<?> celulas = toList(linha.cellIterator());
-                        excelColumnsNumber = celulas.size();
-                    });
-
-                    List<String> choices = new ArrayList<>();
-                    for (int i = 1; i <= excelColumnsNumber; i++) {
-                        choices.add(String.valueOf(i));
-                    }
-
-                    ChoiceDialog<String> dialog = new ChoiceDialog<>("1", choices);
-                    dialog.setTitle("Selecione a coluna");
-                    dialog.setHeaderText("Em qual coluna se localiza os CEP's?");
-                    dialog.setContentText("Escolha a coluna:");
-                    Optional<String> result = dialog.showAndWait();
-
-                    if (result.isPresent()) {
-                        progressIndicator.setVisible(true);
                         linhas.forEach(linha -> {
                             List<?> celulas = toList(linha.cellIterator());
-                            System.out.println(celulas.get(Integer.parseInt(result.get()) - 1));
+                            if (celulas.size() > 1) {
+                                excelColumnsNumber = celulas.size();
+                            }
                         });
-                    } else {
-                        progressIndicator.setVisible(false);
-                    }
 
-                } catch (IOException | InvalidFormatException e) {
-                    e.printStackTrace();
+                        List<String> choices = new ArrayList<>();
+                        for (int i = 1; i <= excelColumnsNumber; i++) {
+                            choices.add(String.valueOf(i));
+                        }
+
+                        ChoiceDialog<String> dialog = new ChoiceDialog<>("1", choices);
+                        dialog.setTitle("Selecione a coluna");
+                        dialog.setHeaderText("Em qual coluna se localiza os CEP's?");
+                        dialog.setContentText("Escolha a coluna:");
+                        Optional<String> result = dialog.showAndWait();
+
+                        result.ifPresent(s -> linhas.forEach(linha -> {
+                            List<?> celulas = toList(linha.cellIterator());
+                            String cep = String.valueOf(celulas.get(Integer.parseInt(s) - 1));
+                            List<String> listaCep = new ArrayList<>();
+                            listaCep.add(cep);
+                            String teste = validatorCep(listaCep);
+                            cepInvalido.add(teste);
+
+                        }));
+
+                        if (!cepInvalido.isEmpty()){
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Cep inválidos");
+                            alert.setHeaderText("Os seguintes CEP's não foram cadastrados, por estarem incorretos. Verifique e tente novamente mais tarde.");
+                            alert.setContentText(String.valueOf(cepInvalido));
+                            alert.showAndWait();
+                        }
+
+                    } catch (IOException | InvalidFormatException e) {
+                        e.printStackTrace();
+                    }
                 }
-                progressIndicator.setVisible(false);
             });
+            progressIndicator.setVisible(false);
         }
     }
+
+    private String validatorCep(List<String> ceps) {
+        EnderecoModel end;
+        NewEnderecoDTO endDTO;
+        List<NewEnderecoDTO> endDtoList = new ArrayList<>();
+        String cepsInvalidos = null;
+
+        for (String cep: ceps) {
+            if (cep.trim().length() == 8 || cep.trim().length() == 9){
+                end = enderecoService.getCepViaCep(cep);
+                if (end != null){
+                    endDTO = new NewEnderecoDTO(end);
+                    endDtoList.add(endDTO);
+                    enderecoService.addNewCep(endDtoList);
+                } else {
+                    cepsInvalidos = cep;
+                }
+            }
+        }
+        return cepsInvalidos;
+    }
+
 
     @FXML
     private void logout() {

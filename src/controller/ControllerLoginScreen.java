@@ -93,6 +93,7 @@ public class ControllerLoginScreen {
             } else {
                 Platform.runLater(() -> {
                     //exibir error para o usuario
+                    enableButtonAndTextField();
                     setResponseHttp(response);
                 });
             }
@@ -216,12 +217,17 @@ public class ControllerLoginScreen {
         labelSenhaError.setText("");
     }
 
-    private void disableButtonAndTextField () {
+    private void disableButtonAndTextField() {
         txtEmail.setDisable(true);
         txtSenha.setDisable(true);
         btnlogin.setDisable(true);
     }
 
+    private void enableButtonAndTextField() {
+        txtEmail.setDisable(false);
+        txtSenha.setDisable(false);
+        btnlogin.setDisable(false);
+    }
     @FXML
     private void keyPressed(KeyEvent evt) {
         if (evt.getCode() == KeyCode.ENTER) {

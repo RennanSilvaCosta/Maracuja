@@ -43,15 +43,13 @@ public class EnderecoService {
         return null;
     }
 
-    public String addNewCep(List<String> ceps) {
-        NewEnderecoDTO enderecoDTO;
+    public String addNewCep(List<NewEnderecoDTO> enderecoDTO) {
         String token = dao.getToken();
         usuarioModel = usuarioService.getUserLogged(token);
-        for (String cep : ceps) {
+        for (NewEnderecoDTO endDTO : enderecoDTO) {
             try {
-                enderecoDTO = gson.fromJson(httpEndereco.sendGET(Constantes.URL_VIA_CEP + cep + "/json", Constantes.getGET()), NewEnderecoDTO.class);
-                enderecoDTO.setEmpresa(usuarioModel.getEmpresa());
-                httpEndereco.sendPOST(Constantes.URL_BASE_PROD + "/enderecos", gson.toJson(enderecoDTO, NewEnderecoDTO.class), Constantes.getPOST(), token);
+                endDTO.setEmpresa(usuarioModel.getEmpresa());
+                httpEndereco.sendPOST(Constantes.URL_BASE_PROD + "/enderecos", gson.toJson(endDTO, NewEnderecoDTO.class), Constantes.getPOST(), token);
             } catch (IOException e) {
                 e.printStackTrace();
             }

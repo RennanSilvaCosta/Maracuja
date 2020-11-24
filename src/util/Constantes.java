@@ -3,7 +3,7 @@ package util;
 public class Constantes {
 
     //SOURCE API
-    public static final String URL_BASE_PROD = "http://localhost:8080";
+    public static final String URL_BASE_PROD = "https://api-maracuja.herokuapp.com";
     //public static final String URL_BASE_LOCAL = "http://localhost:8080";
     //http://localhost:8080
     //https://api-maracuja.herokuapp.com

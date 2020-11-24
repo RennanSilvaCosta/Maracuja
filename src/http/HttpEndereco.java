@@ -24,6 +24,11 @@ public class HttpEndereco {
         con.setRequestProperty("Authorization", "");
 
         int responseCode = con.getResponseCode();
+
+        if (responseCode == Constantes.STATUS_CODE_BAD_REQUEST){
+            return null;
+        }
+
         System.out.println("Sending 'GET' request to URL : " + url);
         System.out.println("Response Code : " + responseCode);
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream(), Charset.forName("UTF-8")));

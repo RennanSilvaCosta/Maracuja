@@ -1,6 +1,7 @@
 package dto;
 
 import model.EmpresaModel;
+import model.EnderecoModel;
 
 import java.io.Serializable;
 
@@ -10,6 +11,15 @@ public class NewEnderecoDTO implements Serializable {
     private String logradouro;
     private String bairro;
     private EmpresaModel empresa;
+
+    public NewEnderecoDTO () {}
+
+    public NewEnderecoDTO (EnderecoModel enderecoModel) {
+        this.cep = enderecoModel.getCep();
+        this.logradouro = enderecoModel.getLogradouro();
+        this.bairro = enderecoModel.getBairro();
+        this.empresa = enderecoModel.getEmpresa();
+    }
 
     public String getCep() {
         return cep;
