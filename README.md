@@ -26,6 +26,7 @@ Selecionar sua planilha, e em seguida a coluna onde os CEP's estão localizados,
 ## :hammer_and_wrench: Tecnologias utilizadas :hammer_and_wrench:
 
 * CSS
+* Heroku
 * intellij IDEA
 * Java
 * JavaFX
