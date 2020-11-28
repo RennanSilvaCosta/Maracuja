@@ -21,7 +21,7 @@ Caso você tenha uma planilha com os CEP's onde você tem estrutura, basta clica
 
 <img src="https://media.giphy.com/media/O6hNGIsiadqwwbmrO6/giphy.gif">
 
-Selecionar sua planilha, e em seguida a coluna onde os CEP's estão localizados, aguarde alguns instantes e pronto. Os CEP's onde você já tem estrutura estão cadastrados e já podem ser pesquisados por qualquer usuario da sua empresa. :ok_hand:
+Selecionar sua planilha, e em seguida a coluna onde os CEP's estão localizados, aguarde alguns instantes e pronto. Os CEP's onde você já tem estrutura estão cadastrados e já podem ser pesquisados por qualquer usuario da sua empresa.
 
 ## :hammer_and_wrench: Tecnologias utilizadas :hammer_and_wrench:
 
@@ -58,4 +58,4 @@ Ou faça um fork no projeto e faça seu pull request :slightly_smiling_face:
 
 ##
 
-### :alien: Apenas, busque conhecimento. :alien:
+### :alien: Apenas, busquem conhecimento. :alien:
