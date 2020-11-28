@@ -225,15 +225,20 @@ public class ControllerMainScreen implements Initializable {
                             List<String> listaCep = new ArrayList<>();
                             listaCep.add(cep);
                             String teste = validatorCep(listaCep);
-                            cepInvalido.add(teste);
-
+                            if (teste != null){
+                                cepInvalido.add(teste);
+                            }
                         }));
 
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         if (!cepInvalido.isEmpty()){
-                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setTitle("Cep inválidos");
                             alert.setHeaderText("Os seguintes CEP's não foram cadastrados, por estarem incorretos. Verifique e tente novamente mais tarde.");
                             alert.setContentText(String.valueOf(cepInvalido));
+                            alert.showAndWait();
+                        } else {
+                            alert.setTitle("Cep's Salvos");
+                            alert.setContentText("Todos os CEP's informados foram salvos com sucesso");
                             alert.showAndWait();
                         }
 
@@ -266,7 +271,6 @@ public class ControllerMainScreen implements Initializable {
         }
         return cepsInvalidos;
     }
-
 
     @FXML
     private void logout() {

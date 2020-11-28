@@ -16,7 +16,11 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.stage.Stage;
 import model.EnderecoModel;
 import service.EnderecoService;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -31,9 +35,7 @@ public class ControllerGerenciarCEPScreen implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         initializeTable();
-
     }
 
     private void initializeTable() {

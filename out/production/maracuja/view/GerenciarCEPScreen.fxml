@@ -4,14 +4,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerGerenciarCEPScreen">
+<Pane prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerGerenciarCEPScreen">
    <Pane layoutX="24.0" layoutY="117.0" prefHeight="504.0" prefWidth="853.0">
-      <JFXTreeTableView fx:id="treeView" editable="true" prefHeight="500.0" prefWidth="850.0" stylesheets="@../stylesheets/styleTreeTableView.css" />
+      <JFXTreeTableView fx:id="treeView" editable="true" prefHeight="500.0" prefWidth="853.0" stylesheets="@../stylesheets/styleTreeTableView.css" />
    </Pane>
-   <JFXButton fx:id="btnSair" layoutX="877.0" mnemonicParsing="false" onAction="#sair" prefWidth="20.0" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="X" />
-   <Label layoutX="562.0" layoutY="80.0" text="Label" />
-   <JFXButton fx:id="btnProcurar" layoutX="296.0" layoutY="81.0" mnemonicParsing="false" text="Button" />
 
-   <TextField layoutX="32.0" layoutY="81.0" />
+   <TextField layoutX="24.0" layoutY="81.0" prefHeight="25.0" prefWidth="156.0" />
+   <JFXButton fx:id="btnAddNewCep" layoutX="523.0" layoutY="81.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Novo CEP" />
+   <JFXButton fx:id="btnExcluirCep" layoutX="727.0" layoutY="81.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Excluir CEP" />
+   <JFXButton fx:id="btnSair" layoutX="877.0" mnemonicParsing="false" onAction="#sair" prefWidth="20.0" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="X" />
 
 </Pane>

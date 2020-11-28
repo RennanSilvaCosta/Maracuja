@@ -63,7 +63,6 @@ public class ControllerRegisterScreen {
     }
 
     private void setErrorMessages(Map<String, String> errors) {
-
         Set<String> fields = errors.keySet();
         clearLabelsErrors();
         alterColorInputsForDefault();
@@ -116,7 +115,6 @@ public class ControllerRegisterScreen {
                 dialog.showAndWait();
             });
         }
-
     }
 
     public class addUsuario extends Thread {
