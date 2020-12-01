@@ -31,7 +31,8 @@ Selecionar sua planilha, e em seguida a coluna onde os CEP's estão localizados,
 * Java
 * JavaFX
 * Maven
-* Mysql
+* ~~Mysql~~
+* SQLite
 * Spring Boot ( API : https://github.com/RennanSilvaCosta/MaracujaAPI )
 * ViaCEP (API : https://viacep.com.br/)
 
@@ -41,17 +42,18 @@ Selecionar sua planilha, e em seguida a coluna onde os CEP's estão localizados,
 * ApachePOI 4.1.2
 * JFoenix 9.0.10
 * Gson 2.8.6
+* SQLite JDBC 3.32.3.2
 
 ## :wrench: Ajustes e melhorias :wrench:
 
 O projeto não foi finalizado, ainda estou com ele em laboratorio e pretendo fazer as seguintes funções e alterações:
 
-* Adicionar CEP através da tela de "gerenciamento de CEP's" (sem utilizar planilha apenas usando o CEP desejado)
-* Deletar um CEP especifico através da tela de "gerenciamento de CEP's"
-* O usuario com perfil de ADM poderá adicionar novos usuarios e deleta-los
-* Recuperação de senha através do email
-* O usuario poderá editar seus dados como; nome de usuario, nome da empresa, senha. Através da tela de "configurações"
-* Utilizar o SQLite localmente em vez do Mysql
+- [ ] Adicionar CEP através da tela de "gerenciamento de CEP's" (sem utilizar planilha apenas usando o CEP desejado)
+- [ ] Deletar um CEP especifico através da tela de "gerenciamento de CEP's"
+- [ ] O usuario com perfil de ADM poderá adicionar novos usuarios e deleta-los
+- [ ] Recuperação de senha através do email
+- [ ] O usuario poderá editar seus dados como; nome de usuario, nome da empresa, senha. Através da tela de "configurações"
+- [x] Utilizar o SQLite localmente em vez do Mysql
 
 ## :raising_hand_woman: Seja um contribuidor :raising_hand_man:
 
