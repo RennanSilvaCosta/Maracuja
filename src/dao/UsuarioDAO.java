@@ -1,9 +1,6 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class UsuarioDAO {
 
@@ -45,6 +42,17 @@ public class UsuarioDAO {
             throwables.printStackTrace();
         }
         return null;
+    }
+
+    public void createTable() {
+        try {
+            Statement statement = DaoFactory.getConnection().createStatement();
+            conn = DaoFactory.getConnection();
+            statement.execute("CREATE TABLE IF NOT EXISTS user_token(token VARCHAR)");
+            System.out.println("Tabela criada com  sucesso");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 package main;
 
+import dao.UsuarioDAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,9 +14,11 @@ public class Main extends Application {
 
     private double xOffset = 0;
     private double yOffset = 0;
+    UsuarioDAO dao = new UsuarioDAO();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        dao.createTable();
         Parent root = FXMLLoader.load(getClass().getResource("/view/LoginScreen.fxml"));
         Scene scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
