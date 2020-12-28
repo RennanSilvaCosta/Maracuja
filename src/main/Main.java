@@ -23,7 +23,7 @@ public class Main extends Application {
         Scene scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
-        primaryStage.getIcons().add(new Image("icons\\icon_maracuja_64px.png"));
+        primaryStage.getIcons().add(new Image("icons/icon_maracuja_64px.png"));
         primaryStage.setScene(scene);
         primaryStage.show();
         scene.getRoot().requestFocus();
