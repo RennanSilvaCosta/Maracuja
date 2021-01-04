@@ -26,15 +26,15 @@
       </font>
    </Label>
    <Label fx:id="labelNomeEmpresaError" layoutX="50.0" layoutY="194.0" prefHeight="17.0" prefWidth="350.0" textFill="RED" />
-   <JFXTextField fx:id="txtNomeEmpresa" focusColor="#ffb300" labelFloat="true" layoutX="50.0" layoutY="169.0" prefHeight="25.0" prefWidth="350.0" promptText="Nome da empresa" unFocusColor="#ffca28" />
+   <JFXTextField fx:id="txtNomeEmpresa" focusColor="#ffb300" unFocusColor="#ffca28" labelFloat="true" layoutX="50.0" layoutY="169.0" prefHeight="25.0" prefWidth="350.0" promptText="Nome da empresa" />
    <Label fx:id="labelNomeUsuarioError" layoutX="50.0" layoutY="257.0" prefHeight="17.0" prefWidth="350.0" textFill="RED" />
-   <JFXTextField fx:id="txtNomeUsuario" focusColor="#ffb300" labelFloat="true" layoutX="50.0" layoutY="232.0" prefHeight="25.0" prefWidth="350.0" promptText="Nome de Usuario" unFocusColor="#ffca28" />
+   <JFXTextField fx:id="txtNomeUsuario" focusColor="#ffb300" unFocusColor="#ffca28" labelFloat="true" layoutX="50.0" layoutY="232.0" prefHeight="25.0" prefWidth="350.0" promptText="Nome de Usuario" />
    <Label fx:id="labelEmailError" layoutX="50.0" layoutY="320.0" prefHeight="17.0" prefWidth="350.0" textFill="RED" />
-   <JFXTextField fx:id="txtEmail" focusColor="#ffb300" labelFloat="true" layoutX="50.0" layoutY="295.0" prefHeight="25.0" prefWidth="350.0" promptText="Email" unFocusColor="#ffca28" />
+   <JFXTextField fx:id="txtEmail" focusColor="#ffb300" unFocusColor="#ffca28" labelFloat="true" layoutX="50.0" layoutY="295.0" prefHeight="25.0" prefWidth="350.0" promptText="Email" />
    <Label fx:id="labelSenhaError" layoutX="50.0" layoutY="383.0" prefHeight="17.0" prefWidth="350.0" textFill="RED" />
-   <JFXPasswordField fx:id="txtSenha" focusColor="#ffb300" labelFloat="true" layoutX="50.0" layoutY="358.0" prefHeight="25.0" prefWidth="350.0" promptText="Senha" unFocusColor="#ffca28" />
+   <JFXPasswordField fx:id="txtSenha" focusColor="#ffb300" unFocusColor="#ffca28" labelFloat="true" layoutX="50.0" layoutY="358.0" prefHeight="25.0" prefWidth="350.0" promptText="Senha" />
    <Label fx:id="labelConfirmarSenhaError" layoutX="50.0" layoutY="446.0" prefHeight="17.0" prefWidth="350.0" textFill="RED" />
-   <JFXPasswordField fx:id="txtConfirmarSenha" focusColor="#ffb300" labelFloat="true" layoutX="50.0" layoutY="421.0" prefHeight="25.0" prefWidth="350.0" promptText="Confirmar senha" unFocusColor="#ffca28" />
+   <JFXPasswordField fx:id="txtConfirmarSenha" focusColor="#ffb300" unFocusColor="#ffca28" labelFloat="true" layoutX="50.0" layoutY="421.0" prefHeight="25.0" prefWidth="350.0" promptText="Confirmar senha" />
    <JFXButton fx:id="btnCriarConta" layoutX="50.0" layoutY="490.0" onAction="#createNewAccount" prefHeight="50.0" prefWidth="350.0" styleClass="btnForm" stylesheets="/stylesheets/styleButton.css" text="Criar conta">
       <font>
          <Font name="Ebrima" size="14.0" />

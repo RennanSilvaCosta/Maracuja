@@ -25,14 +25,14 @@
             </font>
          </JFXPasswordField>
          <Label fx:id="labelSenhaError" layoutX="50.0" layoutY="268.0" textFill="RED" />
-         <Label fx:id="btnEsqueceu" layoutX="200.0" layoutY="290.0" styleClass="btnEsqueceu" stylesheets="@../stylesheets/styleButton.css" text="Esqueceu a senha?" textFill="#a3a3a3" />
+         <Label onMouseClicked="#forgotPassword"  layoutX="200.0" layoutY="290.0" styleClass="btnEsqueceu" stylesheets="@../stylesheets/styleButton.css" text="Esqueceu a senha?" textFill="#a3a3a3" />
          <JFXButton fx:id="btnlogin" layoutX="50.0" layoutY="333.0" onAction="#login" prefHeight="50.0" prefWidth="250.0" styleClass="btnForm" stylesheets="@../stylesheets/styleButton.css" text="Entrar">
             <font>
                <Font name="Ebrima" size="14.0" />
             </font>
          </JFXButton>
          <Label layoutX="96.0" layoutY="404.0" text="Usuario novo?" textFill="#a3a3a3" />
-         <Label fx:id="btnCadastrar" layoutX="176.0" layoutY="404.0" onMouseClicked="#openRegisterScreen" styleClass="btnCadastrar" stylesheets="@../stylesheets/styleButton.css" text="Cadastre-se" textFill="#a3a3a3" />
+         <Label layoutX="176.0" layoutY="404.0" onMouseClicked="#openRegisterScreen" styleClass="btnCadastrar" stylesheets="@../stylesheets/styleButton.css" text="Cadastre-se" textFill="#a3a3a3" />
          <Label layoutX="28.0" layoutY="89.0" text="Bem-vindo de volta" textFill="#575757">
             <font>
                <Font name="Ebrima Bold" size="24.0" />

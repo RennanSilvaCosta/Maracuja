@@ -212,6 +212,10 @@ public class ControllerLoginScreen {
         }
     }
 
+    @FXML
+    private void forgotPassword() {
+        loadNewViewAndCloseOld("/view/ForgotPasswordScreen.fxml", null);
+    }
     private void clearLabelsErros() {
         labelEmailError.setText("");
         labelSenhaError.setText("");
