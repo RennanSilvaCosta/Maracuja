@@ -51,7 +51,7 @@ O projeto não foi finalizado, ainda estou com ele em laboratorio e pretendo faz
 - [ ] Adicionar CEP através da tela de "gerenciamento de CEP's" (sem utilizar planilha apenas usando o CEP desejado)
 - [ ] Deletar um CEP especifico através da tela de "gerenciamento de CEP's"
 - [ ] O usuario com perfil de ADM poderá adicionar novos usuarios e deleta-los
-- [ ] Recuperação de senha através do email
+- [x] Recuperação de senha através do email
 - [ ] O usuario poderá editar seus dados como; nome de usuario, nome da empresa, senha. Através da tela de "configurações"
 - [x] Utilizar o SQLite localmente em vez do Mysql
 
