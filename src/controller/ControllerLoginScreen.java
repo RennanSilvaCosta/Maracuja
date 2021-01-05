@@ -1,5 +1,6 @@
 package controller;
 
+import animatefx.animation.Shake;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -206,9 +207,11 @@ public class ControllerLoginScreen {
         clearLabelsErros();
         if (fields.contains("email")) {
             labelEmailError.setText(erros.get("email"));
+            new Shake(txtEmail).play();
         }
         if (fields.contains("senha")) {
             labelSenhaError.setText(erros.get("senha"));
+            new Shake(txtSenha).play();
         }
     }
 

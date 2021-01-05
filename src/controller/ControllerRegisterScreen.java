@@ -1,5 +1,6 @@
 package controller;
 
+import animatefx.animation.Shake;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -70,22 +71,27 @@ public class ControllerRegisterScreen {
         if (fields.contains("nomeEmpresa")) {
             txtNomeEmpresa.setUnFocusColor(Paint.valueOf(Constantes.COLOR_RED));
             labelNomeEmpresaError.setText(errors.get("nomeEmpresa"));
+            new Shake(txtNomeEmpresa).play();
         }
         if (fields.contains("nomeUsuario")) {
             txtNomeUsuario.setUnFocusColor(Paint.valueOf(Constantes.COLOR_RED));
             labelNomeUsuarioError.setText(errors.get("nomeUsuario"));
+            new Shake(txtNomeUsuario).play();
         }
         if (fields.contains("email")) {
             txtEmail.setUnFocusColor(Paint.valueOf(Constantes.COLOR_RED));
             labelEmailError.setText(errors.get("email"));
+            new Shake(txtEmail).play();
         }
         if (fields.contains("senha")) {
             txtSenha.setUnFocusColor(Paint.valueOf(Constantes.COLOR_RED));
             labelSenhaError.setText(errors.get("senha"));
+            new Shake(txtSenha).play();
         }
         if (fields.contains("confirmarSenha")) {
             txtConfirmarSenha.setUnFocusColor(Paint.valueOf(Constantes.COLOR_RED));
             labelConfirmarSenhaError.setText(errors.get("confirmarSenha"));
+            new Shake(txtConfirmarSenha).play();
         }
     }
 

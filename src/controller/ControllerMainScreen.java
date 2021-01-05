@@ -228,20 +228,18 @@ public class ControllerMainScreen implements Initializable {
                             if (teste != null){
                                 cepInvalido.add(teste);
                             }
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            if (!cepInvalido.isEmpty()){
+                                alert.setTitle("Cep inválidos");
+                                alert.setHeaderText("Os seguintes CEP's não foram cadastrados, por estarem incorretos. Verifique e tente novamente mais tarde.");
+                                alert.setContentText(String.valueOf(cepInvalido));
+                                alert.showAndWait();
+                            } else {
+                                alert.setTitle("Cep's Salvos");
+                                alert.setContentText("Todos os CEP's informados foram salvos com sucesso");
+                                alert.showAndWait();
+                            }
                         }));
-
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        if (!cepInvalido.isEmpty()){
-                            alert.setTitle("Cep inválidos");
-                            alert.setHeaderText("Os seguintes CEP's não foram cadastrados, por estarem incorretos. Verifique e tente novamente mais tarde.");
-                            alert.setContentText(String.valueOf(cepInvalido));
-                            alert.showAndWait();
-                        } else {
-                            alert.setTitle("Cep's Salvos");
-                            alert.setContentText("Todos os CEP's informados foram salvos com sucesso");
-                            alert.showAndWait();
-                        }
-
                     } catch (IOException | InvalidFormatException e) {
                         e.printStackTrace();
                     }
