@@ -67,8 +67,9 @@ public class Constantes {
     public final static Integer STATUS_CODE_SUCCESSFUL = 200;
     public final static Integer STATUS_CODE_NOCONTENT = 204;
     public final static Integer STATUS_CODE_BAD_REQUEST = 400;
-    public final static Integer STATUS_CODE_FORBIDDEN = 403;
     public final static Integer STATUS_CODE_UNAUTHORIZED = 401;
+    public final static Integer STATUS_CODE_FORBIDDEN = 403;
+    public final static Integer STATUS_CODE_NOTFOUND = 404;
     public final static Integer STATUS_CODE_INTERNAL_SERVER_ERROR = 500;
     public final static Integer STATUS_CODE_SERVICE_UNAVAILABLE = 503;
 

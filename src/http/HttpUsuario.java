@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Map;
@@ -95,6 +96,40 @@ public class HttpUsuario {
         }
         return response.getResponse();
     }
+
+    public Map<Integer, String> forgotPassword(String url, String json, String method) throws IOException {
+        HttpResponse response = new HttpResponse();
+        URL obj = new URL(url);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+        con.setRequestMethod(method);
+        con.setRequestProperty("User-Agent", Constantes.getUserAgent());
+        con.setRequestProperty("Accept-Charset", "ISO-8859-1");
+        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5,pt-br");
+        con.setRequestProperty("Content-Type", "application/json;charset=ISO-8859-1");
+        con.setRequestProperty("Authorization", "");
+
+        con.setDoOutput(true);
+        OutputStreamWriter out = new OutputStreamWriter(con.getOutputStream());
+        out.write(json);
+        out.flush();
+        out.close();
+
+        int responseCode = con.getResponseCode();
+        System.out.println("\nSending 'POST' request to URL : " + url);
+        System.out.println("Submit JSON: " + json);
+        System.out.println("Response Code : " + responseCode);
+
+        if (responseCode == Constantes.STATUS_CODE_SUCCESSFUL || responseCode == Constantes.STATUS_CODE_NOCONTENT) {
+            response.addResponse(responseCode, ValidatorExceptionsMessage.FORM_REGISTER_CONTENTTEXT_ALERT_SUCCESS);
+        } else if (responseCode == Constantes.STATUS_CODE_BAD_REQUEST) {
+            response.addResponse(responseCode, ValidatorExceptionsMessage.EMAIL_JA_CADASTRADO);
+        } else {
+            response.addResponse(responseCode, ValidatorExceptionsMessage.SERVER_ERROR);
+        }
+        return response.getResponse();
+    }
+
 
     public Map<Integer, String> autenticated(String url, String json, String method) throws IOException {
         HttpResponse response = new HttpResponse();

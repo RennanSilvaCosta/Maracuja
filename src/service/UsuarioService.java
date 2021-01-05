@@ -2,6 +2,7 @@ package service;
 
 import com.google.gson.Gson;
 import dto.CredenciaisDTO;
+import dto.EmailDTO;
 import dto.NewUserDTO;
 import http.HttpUsuario;
 import model.UsuarioModel;
@@ -36,6 +37,15 @@ public class UsuarioService {
     public UsuarioModel getUserLogged(String token) {
         try {
             return gson.fromJson(httpUsuario.sendGET(Constantes.URL_BASE_PROD + "/auth/user_auth", Constantes.getGET(), token), UsuarioModel.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Map<Integer, String> forgotPassword(EmailDTO email) {
+        try {
+            return httpUsuario.forgotPassword(Constantes.URL_BASE_PROD + "/auth/forgot", gson.toJson(email, EmailDTO.class), Constantes.getPOST());
         } catch (IOException e) {
             e.printStackTrace();
         }
