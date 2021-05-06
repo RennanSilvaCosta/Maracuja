@@ -33,8 +33,9 @@ Selecionar sua planilha, e em seguida a coluna onde os CEP's estão localizados,
 * Maven
 * ~~Mysql~~
 * SQLite
-* Spring Boot ( API : https://github.com/RennanSilvaCosta/MaracujaAPI )
-* ViaCEP (API : https://viacep.com.br/)
+* Spring Boot
+* [MaracujaAPI](https://github.com/RennanSilvaCosta/MaracujaAPI)
+* [ViaCEP](https://viacep.com.br/)
 
 ## :books: Bibliotecas utilizadas :books:
 
