@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
+<AnchorPane prefHeight="500.0" prefWidth="630.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="controller.ControllerConfigScreen" xmlns:fx="http://javafx.com/fxml/1">
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <JFXTextField editable="false" layoutX="22.0" layoutY="26.0" prefHeight="30.0" prefWidth="300.0" text="Cesta de frutas" />
+   <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="340.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../icons/icon_edit.png" />
+      </image>
+   </ImageView>
+
 
 </AnchorPane>

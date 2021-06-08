@@ -34,7 +34,8 @@ import service.EnderecoService;
 import util.Constantes;
 import util.MaskField;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -75,7 +76,7 @@ public class ControllerMainScreen implements Initializable {
 
     int excelColumnsNumber = 0;
     List<String> cepInvalido = new ArrayList<>();
-        
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeListViewMainMenu();
@@ -92,7 +93,7 @@ public class ControllerMainScreen implements Initializable {
                 break;
 
             case Constantes.MAIN_MENU_ITEM_CONFIGURACOES:
-                System.out.println("Configurações");
+                loadNewViewAndCloseOld("/view/ConfigScreen.fxml", null);
                 break;
         }
     }
@@ -122,20 +123,16 @@ public class ControllerMainScreen implements Initializable {
     }
 
     public void initializeListViewMainMenu() {
-        try {
-            Map<String, String> itemList = new HashMap<>();
-            itemList.put(Constantes.MAIN_MENU_ITEM_IMPORTAR_EXCEL, "C:\\Users\\renna\\IdeaProjects\\maracuja\\src\\icons\\mainmenu\\icon_import_csv.png");
-            itemList.put(Constantes.MAIN_MENU_ITEM_GERENCIAR_CEP, "C:\\Users\\renna\\IdeaProjects\\maracuja\\src\\icons\\mainmenu\\icon_folder.png");
-            itemList.put(Constantes.MAIN_MENU_ITEM_CONFIGURACOES, "C:\\Users\\renna\\IdeaProjects\\maracuja\\src\\icons\\mainmenu\\icon_gear.png");
+        Map<String, String> itemList = new HashMap<>();
+        itemList.put(Constantes.MAIN_MENU_ITEM_IMPORTAR_EXCEL, "icons/mainmenu/icon_import_csv.png");
+        itemList.put(Constantes.MAIN_MENU_ITEM_GERENCIAR_CEP, "icons/mainmenu/icon_folder.png");
+        itemList.put(Constantes.MAIN_MENU_ITEM_CONFIGURACOES, "icons/mainmenu/icon_gear.png");
 
-            for (String labelsItemList : itemList.keySet()) {
-                itemListView = new Label(labelsItemList);
-                itemListView.setGraphic(new ImageView(new Image(new FileInputStream(itemList.get(labelsItemList)))));
-                itemListView.setGraphicTextGap(20);
-                listViewMainMenu.getItems().add(itemListView);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        for (String labelsItemList : itemList.keySet()) {
+            itemListView = new Label(labelsItemList);
+            itemListView.setGraphic(new ImageView(new Image(itemList.get(labelsItemList))));
+            itemListView.setGraphicTextGap(20);
+            listViewMainMenu.getItems().add(itemListView);
         }
     }
 
@@ -225,11 +222,11 @@ public class ControllerMainScreen implements Initializable {
                             List<String> listaCep = new ArrayList<>();
                             listaCep.add(cep);
                             String teste = validatorCep(listaCep);
-                            if (teste != null){
+                            if (teste != null) {
                                 cepInvalido.add(teste);
                             }
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                            if (!cepInvalido.isEmpty()){
+                            if (!cepInvalido.isEmpty()) {
                                 alert.setTitle("Cep inválidos");
                                 alert.setHeaderText("Os seguintes CEP's não foram cadastrados, por estarem incorretos. Verifique e tente novamente mais tarde.");
                                 alert.setContentText(String.valueOf(cepInvalido));
@@ -255,10 +252,10 @@ public class ControllerMainScreen implements Initializable {
         List<NewEnderecoDTO> endDtoList = new ArrayList<>();
         String cepsInvalidos = null;
 
-        for (String cep: ceps) {
-            if (cep.trim().length() == 8 || cep.trim().length() == 9){
+        for (String cep : ceps) {
+            if (cep.trim().length() == 8 || cep.trim().length() == 9) {
                 end = enderecoService.getCepViaCep(cep);
-                if (end != null){
+                if (end != null) {
                     endDTO = new NewEnderecoDTO(end);
                     endDtoList.add(endDTO);
                     enderecoService.addNewCep(endDtoList);

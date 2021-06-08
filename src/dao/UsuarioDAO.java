@@ -47,7 +47,6 @@ public class UsuarioDAO {
     public void createTable() {
         try {
             Statement statement = DaoFactory.getConnection().createStatement();
-            conn = DaoFactory.getConnection();
             statement.execute("CREATE TABLE IF NOT EXISTS user_token(token VARCHAR)");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
