@@ -3,13 +3,25 @@
 <?import com.jfoenix.controls.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import util.*?>
 
 <Pane prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerGerenciarCEPScreen">
    <Pane layoutX="24.0" layoutY="117.0" prefHeight="504.0" prefWidth="853.0">
       <JFXTreeTableView fx:id="treeView" editable="true" prefHeight="500.0" prefWidth="853.0" stylesheets="@../stylesheets/styleTreeTableView.css" />
    </Pane>
 
-   <TextField layoutX="24.0" layoutY="81.0" prefHeight="25.0" prefWidth="156.0" />
+   <MaskField layoutX="326.0" layoutY="42.0" mask="DDDDD-DDD" prefHeight="45.0" prefWidth="250.0" text="_____-___">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </MaskField>
+
    <JFXButton fx:id="btnSair" layoutX="877.0" mnemonicParsing="false" onAction="#sair" prefWidth="20.0" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="X" />
+   <Label layoutX="259.0" layoutY="16.0" text="Para adicionar um CEP, basta digita-lo e pressionar ENTER" textFill="#575757">
+      <font>
+         <Font name="Ebrima Bold" size="14.0" />
+      </font></Label>
+   <Label fx:id="lblError" alignment="CENTER" contentDisplay="CENTER" layoutX="427.0" layoutY="93.0" prefHeight="17.0" prefWidth="48.0" textAlignment="CENTER" textFill="RED" />
 
 </Pane>
