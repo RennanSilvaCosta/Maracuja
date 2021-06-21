@@ -43,7 +43,7 @@ public class EnderecoService {
         return null;
     }
 
-    public String addNewCep(List<NewEnderecoDTO> enderecoDTO) {
+    public String saveListCep(List<NewEnderecoDTO> enderecoDTO) {
         String token = dao.getToken();
         usuarioModel = usuarioService.getUserLogged(token);
         for (NewEnderecoDTO endDTO : enderecoDTO) {
@@ -55,6 +55,17 @@ public class EnderecoService {
             }
         }
         return null;
+    }
+
+    public void saveCep(NewEnderecoDTO enderecoDTO) {
+        String token = dao.getToken();
+        usuarioModel = usuarioService.getUserLogged(token);
+        try {
+            enderecoDTO.setEmpresa(usuarioModel.getEmpresa());
+            httpEndereco.sendPOST(Constantes.URL_BASE_PROD + "/enderecos", gson.toJson(enderecoDTO, NewEnderecoDTO.class), Constantes.getPOST(), token);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<EnderecoModel> getAll() {

@@ -1,7 +1,9 @@
 package controller;
 
+import animatefx.animation.SlideInLeft;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import dto.NewEnderecoDTO;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -11,9 +13,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import model.EnderecoModel;
 import service.EnderecoService;
+import util.Constantes;
+import util.MaskField;
 
 import java.net.URL;
 import java.util.List;
@@ -28,10 +34,12 @@ public class ControllerGerenciarCEPScreen implements Initializable {
     private JFXButton btnSair;
 
     @FXML
-    JFXTextField jtfCep;
+    MaskField txtCep;
 
     @FXML
     Label lblError;
+
+    private EnderecoService enderecoService = new EnderecoService();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -93,6 +101,20 @@ public class ControllerGerenciarCEPScreen implements Initializable {
             this.cep = new SimpleStringProperty(cep);
             this.logradouro = new SimpleStringProperty(logradouro);
             this.bairro = new SimpleStringProperty(bairro);
+        }
+    }
+
+    @FXML
+    private void searchCEP(KeyEvent ke) {
+        lblError.setText("");
+        if (ke.getCode() == KeyCode.ENTER) {
+            EnderecoModel endereco = enderecoService.getCepViaCep(txtCep.getText());
+            NewEnderecoDTO end = new NewEnderecoDTO(endereco);
+            if (endereco != null) {
+                enderecoService.saveCep(end);
+            } else {
+                lblError.setText("O cep informado é inválido.");
+            }
         }
     }
 

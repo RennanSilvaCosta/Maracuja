@@ -11,7 +11,7 @@
       <JFXTreeTableView fx:id="treeView" editable="true" prefHeight="500.0" prefWidth="853.0" stylesheets="@../stylesheets/styleTreeTableView.css" />
    </Pane>
 
-   <MaskField layoutX="326.0" layoutY="42.0" mask="DDDDD-DDD" prefHeight="45.0" prefWidth="250.0" text="_____-___">
+   <MaskField fx:id="txtCep" layoutX="326.0" layoutY="42.0" onKeyReleased="#searchCEP" mask="DDDDD-DDD" prefHeight="45.0" prefWidth="250.0" text="_____-___">
       <font>
          <Font size="14.0" />
       </font>

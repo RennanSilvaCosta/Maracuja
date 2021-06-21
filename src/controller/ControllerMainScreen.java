@@ -258,7 +258,7 @@ public class ControllerMainScreen implements Initializable {
                 if (end != null) {
                     endDTO = new NewEnderecoDTO(end);
                     endDtoList.add(endDTO);
-                    enderecoService.addNewCep(endDtoList);
+                    enderecoService.saveListCep(endDtoList);
                 } else {
                     cepsInvalidos = cep;
                 }
